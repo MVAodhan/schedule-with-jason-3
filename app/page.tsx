@@ -4,20 +4,36 @@ import Card from "@/components/Card";
 
 import { Episode } from "@prisma/client";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+const adminUser = process.env.NEXT_PUBLIC_ADMIN_USER;
 
 export default function Home() {
-	// const host = process.env.NEXT_PUBLIC_HOST;
-	// const res = await fetch(`${host}/api/episodes`);
-	// const episodes = await res.json();
 	const { data: session } = useSession();
+	const [episodes, setEpisodes] = useState([]);
+
+	useEffect(() => {
+		const getEpisodes = async () => {
+			const res = await fetch(`/api/episodes`);
+			const episodes = await res.json();
+			setEpisodes(episodes);
+		};
+		getEpisodes();
+	}, []);
 
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
-			{/* {episodes.map((ep: Episode) => {
+			{episodes.map((ep: Episode) => {
 				if (ep.title !== "Building Web Demos + Q&A") {
-					return <Card key={ep.sanityId} episode={ep} title={ep.title} />;
+					return (
+						<Card
+							key={ep.sanityId}
+							episode={ep}
+							title={ep.title}
+							disabled={session?.user?.name === adminUser ? false : true}
+						/>
+					);
 				}
-			})} */}
+			})}
 		</main>
 	);
 }

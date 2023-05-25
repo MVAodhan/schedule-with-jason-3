@@ -7,7 +7,15 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { AiOutlineDelete, AiFillEdit } from "react-icons/ai";
 
-const Card = ({ episode, title }: { episode: Episode; title: String }) => {
+const Card = ({
+	episode,
+	title,
+	disabled,
+}: {
+	episode: Episode;
+	title: String;
+	disabled: boolean;
+}) => {
 	const [usDate, setUsDate] = useState<string>("");
 	const [nzDate, setNzDate] = useState<string>("");
 
@@ -35,11 +43,12 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 		<div className="card w-full bg-base-100 shadow-xl mx-auto ring ring-[#FF9EB1] mb-10">
 			<div className="card-body ">
 				<div className="flex justify-around">
-					<Link href={`/publish/${episode.sanityId}`}>
+					<Link href={`/edit/${episode.sanityId}`}>
 						<button className="btn bg-transparent hover:bg-transparent">
 							<AiFillEdit className="fill-black" />
 						</button>
 					</Link>
+
 					<label
 						htmlFor={`modal-id${episode.id}`}
 						className="btn bg-transparent hover:bg-transparent"
@@ -69,10 +78,11 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 					<div className="modal-action flex justify-around">
 						<label
 							htmlFor={`modal-id${episode.id}`}
-							className="btn bg-red-700"
-							onClick={deleteFn}
+							className="btn cursor-none bg-red-700"
 						>
-							Yes
+							<button onClick={deleteFn} disabled={disabled}>
+								Yes
+							</button>
 						</label>
 						<label htmlFor={`modal-id${episode.id}`} className="btn">
 							No

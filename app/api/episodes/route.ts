@@ -11,3 +11,11 @@ export async function GET(request: Request) {
 
 	return NextResponse.json(episodes);
 }
+
+export async function POST(request: Request) {
+	const req = await request.json();
+
+	console.log(req.id);
+
+	return new NextResponse(req.id);
+}

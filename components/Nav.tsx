@@ -7,7 +7,9 @@ const Nav = () => {
 	return (
 		<div className="navbar bg-base-100">
 			<div className="flex-1">
-				<a className="btn btn-ghost normal-case text-xl">SWJ 3.0</a>
+				<a className="btn btn-ghost normal-case text-xl" href={"/"}>
+					SWJ 3.0
+				</a>
 			</div>
 			<div>{session && <p>{session.user?.name}</p>}</div>
 			<div className="flex-none">
