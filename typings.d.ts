@@ -2,3 +2,9 @@
 declare interface Date {
 	toTemporalInstant: () => void; // Replace 'void' with the correct return type if necessary
 }
+
+interface Guest {
+	twitter: string;
+	image: string;
+	name: string;
+}
