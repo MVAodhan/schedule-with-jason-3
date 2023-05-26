@@ -1,6 +1,7 @@
 "use client";
 
-import Sanity from "@/components/edit-components/sanity/container";
+import Calendar from "@/components/edit-components/calendar/calendar";
+import Sanity from "@/components/edit-components/container";
 import { getDates } from "@/lib/utils";
 import { Episode } from "@prisma/client";
 import { useEffect, useState } from "react";
@@ -43,13 +44,17 @@ const Page = ({ params }: { params: Params }) => {
 		}
 	}, [episode]);
 
-	console.log(guest.name);
-
 	const renderTab = () => {
 		switch (activeTab) {
 			case "calendar":
-				// return <Calendar episode={episode} />;
-				return "container";
+				return (
+					<Calendar
+						episode={episode!}
+						usDate={usDate}
+						nzDate={nzDate}
+						guest={guest}
+					/>
+				);
 			// case "youtube":
 			// 	return <Youtube episode={episode} />;
 			// case "twitter":

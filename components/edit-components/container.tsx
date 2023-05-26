@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Initial from "./Initial";
-import Final from "./Final";
+import Initial from "./sanity/Initial";
+import Final from "./sanity/Final";
 
 import { Episode } from "@prisma/client";
 
