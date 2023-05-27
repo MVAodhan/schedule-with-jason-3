@@ -10,7 +10,7 @@ import { ChaptersPayload } from "@/lib/types";
 const Generation = ({ episode }: { episode: Episode }) => {
 	const chaptersRef = useRef<HTMLTextAreaElement>(null);
 	const { data: session } = useSession();
-	const adminUser = process.env.NEXT_PUBLIC_ADMIN_USER;
+
 	const updateChapters = async () => {
 		const payload: ChaptersPayload = {
 			episodeId: episode.id,
@@ -24,20 +24,22 @@ const Generation = ({ episode }: { episode: Episode }) => {
 	return (
 		<div className="w-full flex justify-center">
 			<div className="w-4/5 flex items-center  h-[400px]">
-				<div className=" w-1/2  flex flex-col item-center">
-					<label className="label flex justify-center">Chapters</label>
-					<textarea
-						className="textarea textarea-bordered w-full"
-						placeholder="Chapters"
-						ref={chaptersRef}
-						defaultValue={episode.chapters ? episode.chapters : ""}
-					></textarea>
+				<div className=" w-1/2  flex flex-col item-center justify-between h-full">
+					<div>
+						<label className="label flex justify-center">Chapters</label>
+						<textarea
+							className="textarea textarea-bordered w-full"
+							placeholder="Chapters"
+							ref={chaptersRef}
+							defaultValue={episode.chapters ? episode.chapters : ""}
+						></textarea>
+					</div>
 					<button
 						className="btn btn-outline mt-5"
 						onClick={updateChapters}
-						disabled={session?.user?.name === adminUser ? false : true}
+						disabled={session?.user?.role !== "admin" ? true : false}
 					>
-						Add Chapters
+						Update Chapters
 					</button>
 				</div>
 

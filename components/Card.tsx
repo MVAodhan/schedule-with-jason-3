@@ -20,8 +20,6 @@ const Card = ({
 	const [usDate, setUsDate] = useState<string>("");
 	const [nzDate, setNzDate] = useState<string>("");
 
-	const { data: session } = useSession();
-
 	useEffect(() => {
 		let { usDate, nzDate } = getDates(episode.date);
 		setUsDate(usDate);
