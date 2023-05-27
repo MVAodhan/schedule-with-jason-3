@@ -6,6 +6,7 @@ import Link from "next/link";
 // import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { AiOutlineDelete, AiFillEdit } from "react-icons/ai";
+import { useSession } from "next-auth/react";
 
 const Card = ({
 	episode,
@@ -18,6 +19,8 @@ const Card = ({
 }) => {
 	const [usDate, setUsDate] = useState<string>("");
 	const [nzDate, setNzDate] = useState<string>("");
+
+	const { data: session } = useSession();
 
 	useEffect(() => {
 		let { usDate, nzDate } = getDates(episode.date);
@@ -78,7 +81,9 @@ const Card = ({
 					<div className="modal-action flex justify-around">
 						<label
 							htmlFor={`modal-id${episode.id}`}
-							className="btn cursor-none bg-red-700"
+							className={`btn ${
+								disabled ? "cursor-none disabled " : "bg-red-500"
+							}`}
 						>
 							<button onClick={deleteFn} disabled={disabled}>
 								Yes

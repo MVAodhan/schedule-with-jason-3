@@ -29,7 +29,7 @@ export default function Home() {
 							key={ep.sanityId}
 							episode={ep}
 							title={ep.title}
-							disabled={session?.user?.name === adminUser ? false : true}
+							disabled={session?.user?.role !== "admin" ? true : false}
 						/>
 					);
 				}
