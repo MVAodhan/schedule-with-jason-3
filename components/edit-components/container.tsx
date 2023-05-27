@@ -29,7 +29,6 @@ const Sanity = ({
 			case "fin":
 				return <Final />;
 			default:
-				// return "Init";
 				return (
 					<Initial
 						episode={episode}

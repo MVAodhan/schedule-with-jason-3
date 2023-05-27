@@ -17,7 +17,10 @@ const Calendar = ({
 	nzDate: string;
 	guest: Guest;
 }) => {
-	// const title = `LWJ: ${episode.title} with ${episode.guest.name}`;
+	let title;
+	if (episode) {
+		title = `LWJ: ${episode.title} with ${guest.name}`;
+	}
 
 	const titleRef = useRef<HTMLInputElement | null>(null);
 	const descRef = useRef<HTMLTextAreaElement | null>(null);
@@ -47,7 +50,7 @@ const Calendar = ({
 			<div className="flex mt-5 items-center w-full">
 				<input
 					type="text"
-					defaultValue={episode.title}
+					defaultValue={title}
 					ref={titleRef}
 					className="input input-bordered w-full"
 				/>
