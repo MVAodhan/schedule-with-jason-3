@@ -41,8 +41,8 @@ const Sanity = ({
 	};
 
 	return (
-		<div className="flex flex-col items-center ">
-			<div className="tabs tabs-boxed w-full flex justify-center bg-[#FFFFFF] ">
+		<div className="flex flex-col items-center h-full">
+			<div className="tabs tabs-boxed w-full flex justify-center bg-[#FFFFFF] h-full">
 				{tabs.map((tab, i) => (
 					<a
 						key={i}

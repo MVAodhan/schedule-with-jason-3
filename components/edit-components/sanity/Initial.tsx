@@ -27,7 +27,7 @@ const Initial = ({
 	};
 	return (
 		<>
-			<div className="flex">
+			<div className="flex h-full">
 				<div className="mt-5 flex justify-center">
 					US Date: {usDate ? usDate : "no date"}
 				</div>

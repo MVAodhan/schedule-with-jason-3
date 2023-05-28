@@ -2,14 +2,19 @@
 
 import { Episode } from "@prisma/client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import LinkContainer from "./linkContainer";
 import { useSession } from "next-auth/react";
-import { ChaptersPayload } from "@/lib/types";
+import { ChaptersPayload, TSessionUser } from "@/lib/types";
 
 const Generation = ({ episode }: { episode: Episode }) => {
 	const chaptersRef = useRef<HTMLTextAreaElement>(null);
+	const [user, setUser] = useState<TSessionUser | null>();
+
 	const { data: session } = useSession();
+	if (session) {
+		setUser(session.user);
+	}
 
 	const updateChapters = async () => {
 		const payload: ChaptersPayload = {
@@ -22,7 +27,7 @@ const Generation = ({ episode }: { episode: Episode }) => {
 		});
 	};
 	return (
-		<div className="w-full flex justify-center">
+		<div className="w-full flex justify-center h-[800px]">
 			<div className="w-4/5 flex items-center  h-[400px]">
 				<div className=" w-1/2  flex flex-col item-center justify-between h-full">
 					<div>
@@ -31,22 +36,19 @@ const Generation = ({ episode }: { episode: Episode }) => {
 							className="textarea textarea-bordered w-full"
 							placeholder="Chapters"
 							ref={chaptersRef}
-							defaultValue={episode.chapters ? episode.chapters : ""}
 						></textarea>
 					</div>
 					<button
 						className="btn btn-outline mt-5"
 						onClick={updateChapters}
-						disabled={session?.user?.role !== "admin" ? true : false}
+						disabled={user?.role !== "admin" ? true : false}
 					>
 						Update Chapters
 					</button>
 				</div>
 
-				<div className="w-1/2 flex flex-col items-center">
-					{/* <LinkContainer episode={episode} />
-					 */}
-					Link Container
+				<div className="w-1/2 flex flex-col items-center h-full">
+					<LinkContainer episode={episode} />
 				</div>
 			</div>
 		</div>

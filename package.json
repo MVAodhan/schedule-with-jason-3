@@ -33,9 +33,11 @@
     "tailwindcss": "3.3.2",
     "tailwindcss-animate": "^1.0.5",
     "typescript": "5.0.4",
+    "uuid": "^9.0.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@types/uuid": "^9.0.1",
     "prisma": "^4.14.1"
   }
 }
