@@ -1,6 +1,6 @@
 "use client";
 
-import { TLink, TSessionUser } from "@/lib/types";
+import { TLink, TSessionUser, UpdatePayload } from "@/lib/types";
 import { Episode } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useRef, useState } from "react";
@@ -38,8 +38,8 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
 		);
 	};
 	const updateLinks = async () => {
+		let uniqueLinks;
 		console.log(links);
-		let uniqueLinks = [];
 		if (links) {
 			uniqueLinks = links.filter(
 				(obj: { value: string }, index: any, self: any[]) =>
@@ -47,13 +47,18 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
 			);
 		}
 		console.log(uniqueLinks);
-		// await axios.post("/api/update-links", {
-		// 	ep: episode,
-		// 	links: links,
-		// 	demo: demoRef.current?.value,
-		// 	repo: repoRef.current?.value,
-		// });
-		// console.log(uniqueLinks);
+		let episodeId = episode.id;
+		const payload: UpdatePayload = {
+			episodeId: episodeId,
+			type: "links",
+			links: uniqueLinks,
+			demo: demoRef.current?.value,
+			repo: repoRef.current?.value,
+		};
+		const updated = await fetch(`/api/episode/${episode.sanityId}`, {
+			method: "POST",
+			body: JSON.stringify(payload),
+		});
 	};
 	return (
 		<div className="w-full flex flex-col items-center ">
@@ -75,7 +80,7 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
 					<div className="w-full flex  items-center">
 						<label className="label">Demo</label>
 						<input
-							defaultValue={JSON.stringify(episode.demo)}
+							defaultValue={episode.demo ? episode.demo : ""}
 							type="text"
 							ref={demoRef}
 							placeholder="Type here"
@@ -85,7 +90,7 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
 					<div className="w-full flex  items-center">
 						<label className="label">Repo</label>
 						<input
-							// defaultValue={episode.repo}
+							defaultValue={episode.repo ? episode.repo : ""}
 							type="text"
 							ref={repoRef}
 							placeholder="Type here"
@@ -111,12 +116,11 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
 				<div>
 					<button
 						className="btn btn-outline"
-						// onClick={updateLinks}
+						onClick={updateLinks}
 						disabled={user?.role !== "admin" ? true : false}
 					>
-						Edit Links
+						Update Links
 					</button>
-					<button onClick={updateLinks}>Log links</button>
 				</div>
 			)}
 		</div>

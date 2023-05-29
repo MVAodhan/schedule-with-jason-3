@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { updateValidator } from "@/lib/types/schedma";
+import { json } from "stream/consumers";
 
 const prisma = new PrismaClient();
 export async function GET(
@@ -20,16 +21,33 @@ export async function POST(request: Request) {
 	const body = await request.json();
 	let results = updateValidator.safeParse(body);
 	if (!results.success) {
+		prisma.$disconnect();
 		return NextResponse.json({ message: "Insufficient data" });
-	} else if (results.data.type === "chapters") {
-		let updated = await prisma.episode.update({
-			where: {
-				id: results.data.episodeId,
-			},
-			data: {
-				chapters: results.data.chapters,
-			},
-		});
-		return NextResponse.json(updated);
+	}
+	switch (results.data.type) {
+		case "chapters":
+			await prisma.episode.update({
+				where: {
+					id: results.data.episodeId,
+				},
+				data: {
+					chapters: results.data.chapters,
+				},
+			});
+			prisma.$disconnect();
+			return NextResponse.json({ message: "Chapters updated" });
+		case "links":
+			await prisma.episode.update({
+				where: {
+					id: results.data.episodeId,
+				},
+				data: {
+					links: results.data.links,
+					demo: results.data.demo,
+					repo: results.data.repo,
+				},
+			});
+			prisma.$disconnect();
+			return NextResponse.json({ message: "Links updated" });
 	}
 }
