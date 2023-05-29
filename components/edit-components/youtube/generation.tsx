@@ -1,25 +1,31 @@
 "use client";
 
 import { Episode } from "@prisma/client";
-
 import { useEffect, useRef, useState } from "react";
 import LinkContainer from "./linkContainer";
 import { useSession } from "next-auth/react";
-import { ChaptersPayload, TSessionUser } from "@/lib/types";
+import { UpdatePayload, TSessionUser } from "@/lib/types";
 
 const Generation = ({ episode }: { episode: Episode }) => {
 	const chaptersRef = useRef<HTMLTextAreaElement>(null);
 	const [user, setUser] = useState<TSessionUser | null>();
+	// const [episodeId, setEpisodeId] = useState<number>();
 
 	const { data: session } = useSession();
-	if (session) {
-		setUser(session.user);
-	}
+
+	useEffect(() => {
+		if (session) {
+			setUser(session.user);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const updateChapters = async () => {
-		const payload: ChaptersPayload = {
-			episodeId: episode.id,
+		let episodeId = episode.id;
+		const payload: UpdatePayload = {
+			episodeId: episodeId!,
 			chapters: chaptersRef.current?.value!,
+			type: "chapters",
 		};
 		const updated = await fetch(`/api/episode/${episode.sanityId}`, {
 			method: "POST",

@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { chaptersValidator } from "../zod";
+import { updateValidator } from "./schedma";
 
-type ChaptersPayload = z.infer<typeof chaptersValidator>;
+type UpdatePayload = z.infer<typeof updateValidator>;
 
 type TSessionUser = {
 	email?: string | null | undefined;

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { chaptersValidator } from "@/lib/zod";
+import { updateValidator } from "@/lib/types/schedma";
+
 const prisma = new PrismaClient();
 export async function GET(
 	request: Request,
@@ -17,10 +18,10 @@ export async function GET(
 
 export async function POST(request: Request) {
 	const body = await request.json();
-	let results = chaptersValidator.safeParse(body);
+	let results = updateValidator.safeParse(body);
 	if (!results.success) {
 		return NextResponse.json({ message: "Insufficient data" });
-	} else {
+	} else if (results.data.type === "chapters") {
 		let updated = await prisma.episode.update({
 			where: {
 				id: results.data.episodeId,
