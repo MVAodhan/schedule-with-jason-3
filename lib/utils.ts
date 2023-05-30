@@ -91,3 +91,12 @@ export const getScheduleTime = (date: string, tweetType?: TTweetType) => {
 
 	return formattedDateTimeString;
 };
+
+export const getHighlightText = (
+	twitter: string = "",
+	tech: string = "",
+	slug: string = ""
+) => {
+	return `Did you miss @${twitter} teaching us about ${tech} live on LWJ?
+No worries! Watch highlights from the episode here, then check out the full episode replay ${slug}`;
+};

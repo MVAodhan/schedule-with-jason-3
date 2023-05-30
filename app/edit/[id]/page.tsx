@@ -2,9 +2,11 @@
 
 import Calendar from "@/components/edit-components/calendar/calendar";
 import Sanity from "@/components/edit-components/container";
+import Twitter from "@/components/edit-components/twitter/twitter";
 import Youtube from "@/components/edit-components/youtube/youtube";
 import { getDates } from "@/lib/utils";
 import { Episode } from "@prisma/client";
+
 import { useEffect, useState } from "react";
 
 interface Params {
@@ -58,8 +60,8 @@ const Page = ({ params }: { params: Params }) => {
 				);
 			case "youtube":
 				return <Youtube episode={episode!} />;
-			// case "twitter":
-			// 	return <Twitter episode={episode} />;
+			case "twitter":
+				return <Twitter episode={episode!} guest={guest} />;
 			default:
 				// return "default";
 				return (

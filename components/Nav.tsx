@@ -1,5 +1,6 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import React from "react";
 
 const Nav = () => {
@@ -10,8 +11,20 @@ const Nav = () => {
 				<a className="btn btn-ghost normal-case text-xl" href={"/"}>
 					SWJ 3.0
 				</a>
+				{session && (
+					<div className="avatar">
+						<button className="w-8 rounded ml-2">
+							<Image
+								src={session.user?.image!}
+								width={40}
+								height={40}
+								alt="user avatar"
+								style={{ borderRadius: "50%" }}
+							/>
+						</button>
+					</div>
+				)}
 			</div>
-			<div>{session && <p>{session.user?.name}</p>}</div>
 			<div className="flex-none">
 				<ul className="menu menu-horizontal px-1">
 					{session ? (

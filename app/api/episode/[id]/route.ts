@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { updateValidator } from "@/lib/types/schedma";
-import { json } from "stream/consumers";
 
 const prisma = new PrismaClient();
 export async function GET(
@@ -49,5 +48,16 @@ export async function POST(request: Request) {
 			});
 			prisma.$disconnect();
 			return NextResponse.json({ message: "Links updated" });
+		case "tech":
+			await prisma.episode.update({
+				where: {
+					id: results.data.episodeId,
+				},
+				data: {
+					tech: results.data.tech,
+				},
+			});
+			prisma.$disconnect();
+			return NextResponse.json({ message: "Chapters updated" });
 	}
 }
