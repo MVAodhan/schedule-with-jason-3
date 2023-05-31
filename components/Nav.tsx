@@ -10,6 +10,11 @@ const Tabs = [
 		path: "/add",
 		label: "Add Episode",
 	},
+	{
+		id: 2,
+		path: "/schedule",
+		label: "Scheduled Episodes",
+	},
 ];
 
 const Nav = () => {

@@ -3,6 +3,7 @@
 import { TSessionUser } from "@/lib/types";
 import { getUtcDate } from "@/lib/utils";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
 const Page = () => {
@@ -17,6 +18,8 @@ const Page = () => {
 	const dateRef = useRef<HTMLInputElement | null>(null);
 	const timeRef = useRef<HTMLInputElement | null>(null);
 	const techRef = useRef<HTMLInputElement | null>(null);
+
+	const router = useRouter();
 	useEffect(() => {
 		if (session) {
 			setUser(session?.user);
@@ -24,17 +27,34 @@ const Page = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	const addScheduled = async () => {
-		console.log(guestRef.current?.value);
-		console.log(titleRef.current?.value);
-		console.log(guestHandleRef.current?.value);
-		console.log(twitterDescRef.current?.value);
-		console.log(textDescRef.current?.value);
-		console.log(techRef.current?.value);
+		// console.log(guestRef.current?.value);
+		// console.log(titleRef.current?.value);
+		// console.log(guestHandleRef.current?.value);
+		// console.log(twitterDescRef.current?.value);
+		// console.log(textDescRef.current?.value);
+		// console.log(techRef.current?.value);
+
 		// deconstructing date and time ref to construct date for db
 		const [year, month, day] = dateRef.current?.value.split("-")!;
 		const [hour, minutes] = timeRef.current?.value.split(":")!;
 		const date = getUtcDate(year, month, day, hour, minutes);
-		console.log(date);
+
+		const payload = {
+			guest: guestRef.current?.value,
+			description: textDescRef.current?.value,
+			date: date,
+			guest_twitter: guestHandleRef.current?.value,
+			title: titleRef.current?.value,
+			twitter_description: twitterDescRef.current?.value,
+		};
+
+		const scheduled = await fetch("/api/schedule", {
+			method: "POST",
+			body: JSON.stringify(payload),
+		});
+
+		console.log(scheduled);
+		router.push("/");
 	};
 	return (
 		<main className="w-screen  flex flex-col items-center h-screen">
@@ -75,9 +95,6 @@ const Page = () => {
 									ref={dateRef}
 									type="date"
 									className="input input-bordered w-full max-w-xs"
-									onChange={() => {
-										console.log(dateRef.current?.value);
-									}}
 								/>
 							</div>
 							<div className="flex flex-col items-center justify-center w-1/2">
@@ -86,9 +103,6 @@ const Page = () => {
 									ref={timeRef}
 									type="time"
 									className="input input-bordered w-full max-w-xs"
-									onChange={() => {
-										console.log(timeRef.current?.value);
-									}}
 								/>
 							</div>
 						</div>
