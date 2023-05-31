@@ -7,23 +7,21 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { AiOutlineDelete, AiFillEdit } from "react-icons/ai";
 import { useSession } from "next-auth/react";
+import { TSessionUser } from "@/lib/types";
 
-const Card = ({
-	episode,
-	title,
-	disabled,
-}: {
-	episode: Episode;
-	title: String;
-	disabled: boolean;
-}) => {
+const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 	const [usDate, setUsDate] = useState<string>("");
 	const [nzDate, setNzDate] = useState<string>("");
+	const [user, setUser] = useState<TSessionUser | null>();
+	const { data: session } = useSession();
 
 	useEffect(() => {
 		let { usDate, nzDate } = getDates(episode.date);
 		setUsDate(usDate);
 		setNzDate(nzDate);
+		if (session) {
+			setUser(session.user);
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -79,11 +77,12 @@ const Card = ({
 					<div className="modal-action flex justify-around">
 						<label
 							htmlFor={`modal-id${episode.id}`}
-							className={`btn ${
-								disabled ? "cursor-none disabled " : "bg-red-500"
-							}`}
+							className={"btn bg-red-500"}
 						>
-							<button onClick={deleteFn} disabled={disabled}>
+							<button
+								onClick={deleteFn}
+								disabled={user?.role !== "admin" ? true : false}
+							>
 								Yes
 							</button>
 						</label>

@@ -1,7 +1,16 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
+
+const Tabs = [
+	{
+		id: 1,
+		path: "/add",
+		label: "Add Episode",
+	},
+];
 
 const Nav = () => {
 	const { data: session } = useSession();
@@ -27,6 +36,11 @@ const Nav = () => {
 			</div>
 			<div className="flex-none">
 				<ul className="menu menu-horizontal px-1">
+					{Tabs.map((tab) => (
+						<li key={tab.id}>
+							<Link href={tab.path}>{tab.label}</Link>
+						</li>
+					))}
 					{session ? (
 						<li>
 							<button onClick={() => signOut()}>Signout</button>

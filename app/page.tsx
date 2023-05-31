@@ -1,14 +1,13 @@
 "use client";
 
 import Card from "@/components/Card";
+import { TSessionUser } from "@/lib/types";
 
 import { Episode } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-const adminUser = process.env.NEXT_PUBLIC_ADMIN_USER;
 
 export default function Home() {
-	const { data: session } = useSession();
 	const [episodes, setEpisodes] = useState([]);
 
 	useEffect(() => {
@@ -18,20 +17,15 @@ export default function Home() {
 			setEpisodes(episodes);
 		};
 		getEpisodes();
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
+		<main className="flex min-h-screen flex-col items-center  p-24">
 			{episodes.map((ep: Episode) => {
 				if (ep.title !== "Building Web Demos + Q&A") {
-					return (
-						<Card
-							key={ep.sanityId}
-							episode={ep}
-							title={ep.title}
-							disabled={session?.user?.role !== "admin" ? true : false}
-						/>
-					);
+					return <Card key={ep.sanityId} episode={ep} title={ep.title} />;
 				}
 			})}
 		</main>

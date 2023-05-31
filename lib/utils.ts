@@ -100,3 +100,22 @@ export const getHighlightText = (
 	return `Did you miss @${twitter} teaching us about ${tech} live on LWJ?
 No worries! Watch highlights from the episode here, then check out the full episode replay ${slug}`;
 };
+
+export const getUtcDate = (
+	year: string,
+	month: string,
+	day: string,
+	hour: string,
+	minutes: string
+) => {
+	const zonedDateTime = Temporal.ZonedDateTime.from({
+		timeZone: "America/Los_Angeles",
+		year: Number(year),
+		month: Number(month),
+		day: Number(day),
+		hour: Number(hour),
+		minute: Number(minutes),
+	});
+
+	return zonedDateTime.toInstant().toString();
+};
