@@ -1,4 +1,6 @@
-import Card from "@/components/Card";
+"use client";
+
+import ScheduleCard from "@/components/ScheduleCard";
 import { Episode } from "@prisma/client";
 
 const Page = async () => {
@@ -9,9 +11,10 @@ const Page = async () => {
 	const episodes = await res.json();
 	return (
 		<main className="flex min-h-screen flex-col items-center  p-24">
+			<h2 className="text-2xl mb-10">Episodes For Scheduling</h2>
 			{episodes?.map((ep: Episode) => {
 				if (ep.title !== "Building Web Demos + Q&A") {
-					return <Card key={ep.sanityId} episode={ep} title={ep.title} />;
+					return <ScheduleCard key={ep.id} episode={ep} title={ep.title} />;
 				}
 			})}
 		</main>

@@ -4,6 +4,9 @@ const nextConfig = {
 		loader: "custom",
 		loaderFile: "./lib/images/index.js",
 	},
+	experimental: {
+		serverActions: true,
+	},
 };
 
 module.exports = nextConfig;

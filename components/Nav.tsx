@@ -13,7 +13,7 @@ const Tabs = [
 	{
 		id: 2,
 		path: "/schedule",
-		label: "Scheduled Episodes",
+		label: "Scheduling",
 	},
 ];
 

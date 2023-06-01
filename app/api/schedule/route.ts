@@ -6,14 +6,12 @@ const prisma = new PrismaClient();
 export async function GET(request: Request) {
 	let episodes = await prisma.schedule.findMany();
 
-	prisma.$disconnect();
-
 	return NextResponse.json(episodes);
+	prisma.$disconnect();
 }
 
 export async function POST(request: Request) {
 	const body = await request.json();
-	console.log(body);
 	const scheduled = await prisma.schedule.create({
 		data: {
 			guest_name: body.guest,
