@@ -1,5 +1,6 @@
 import ScheduleCard from "@/components/ScheduleCard";
 import { Episode } from "@prisma/client";
+import { useEffect, useState } from "react";
 
 const Page = async () => {
 	const host = process.env.NEXT_PUBLIC_HOST;
@@ -7,9 +8,18 @@ const Page = async () => {
 		method: "GET",
 		cache: "no-store",
 	});
-	const episodes = await res.json();
+	const [episodes, setEpisodes] = useState([]);
 
-	console.log(host);
+	useEffect(() => {
+		const getEpisodes = async () => {
+			const res = await fetch(`/api/schedule`);
+			const episodes = await res.json();
+			setEpisodes(episodes);
+		};
+		getEpisodes();
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 	return (
 		<main className="flex min-h-screen flex-col items-center  p-24">
 			<h2 className="text-2xl mb-10">Episodes For Scheduling</h2>

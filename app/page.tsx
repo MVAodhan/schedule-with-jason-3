@@ -1,10 +1,8 @@
 "use client";
 
 import Card from "@/components/Card";
-import { TSessionUser } from "@/lib/types";
 
 import { Episode } from "@prisma/client";
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 export default function Home() {
