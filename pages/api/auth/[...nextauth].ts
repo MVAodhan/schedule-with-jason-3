@@ -21,4 +21,6 @@ const options = {
 	},
 };
 
-export default (req, res) => NextAuth(req, res, options);
+const AuthFunction = (req, res) => NextAuth(req, res, options);
+
+export default AuthFunction;
