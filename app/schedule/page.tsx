@@ -1,3 +1,5 @@
+"use client";
+
 import ScheduleCard from "@/components/ScheduleCard";
 import { Episode } from "@prisma/client";
 import { useEffect, useState } from "react";
