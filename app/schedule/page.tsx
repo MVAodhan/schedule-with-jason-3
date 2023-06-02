@@ -1,5 +1,3 @@
-"use client";
-
 import ScheduleCard from "@/components/ScheduleCard";
 import { Episode } from "@prisma/client";
 
@@ -7,8 +5,10 @@ const Page = async () => {
 	const host = process.env.NEXT_PUBLIC_HOST;
 	const res = await fetch(`${host}/api/schedule`, {
 		method: "GET",
+		cache: "no-store",
 	});
 	const episodes = await res.json();
+
 	return (
 		<main className="flex min-h-screen flex-col items-center  p-24">
 			<h2 className="text-2xl mb-10">Episodes For Scheduling</h2>

@@ -56,6 +56,7 @@ const Page = () => {
 		console.log(scheduled);
 		router.push("/");
 	};
+	console.log(user);
 	return (
 		<main className="w-screen  flex flex-col items-center h-screen">
 			<section className="w-full h-full md:w-10/12 flex flex-col items-center">
