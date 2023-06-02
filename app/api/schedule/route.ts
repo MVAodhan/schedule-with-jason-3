@@ -6,8 +6,8 @@ const prisma = new PrismaClient();
 export async function GET(request: Request) {
 	let episodes = await prisma.schedule.findMany();
 
-	return NextResponse.json(episodes);
 	prisma.$disconnect();
+	return NextResponse.json(episodes);
 }
 
 export async function POST(request: Request) {
