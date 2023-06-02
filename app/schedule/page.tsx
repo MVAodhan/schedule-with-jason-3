@@ -9,6 +9,7 @@ const Page = async () => {
 	});
 	const episodes = await res.json();
 
+	console.log(host);
 	return (
 		<main className="flex min-h-screen flex-col items-center  p-24">
 			<h2 className="text-2xl mb-10">Episodes For Scheduling</h2>
