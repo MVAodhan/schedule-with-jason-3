@@ -1,5 +1,6 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
+import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 
@@ -14,13 +15,14 @@ const options = {
 		}),
 	],
 	callbacks: {
-		session({ session, user }) {
+		session({ session, user }: { session: any; user: any }) {
 			session.user.role = user.role;
 			return session;
 		},
 	},
 };
 
-const AuthFunction = (req, res) => NextAuth(req, res, options);
+const AuthFunction = (req: NextApiRequest, res: NextApiResponse) =>
+	NextAuth(req, res, options);
 
 export default AuthFunction;
