@@ -4,12 +4,7 @@ import ScheduleCard from "@/components/ScheduleCard";
 import { Episode } from "@prisma/client";
 import { useEffect, useState } from "react";
 
-const Page = async () => {
-	const host = process.env.NEXT_PUBLIC_HOST;
-	const res = await fetch(`${host}/api/schedule`, {
-		method: "GET",
-		cache: "no-store",
-	});
+const Page = () => {
 	const [episodes, setEpisodes] = useState([]);
 
 	useEffect(() => {
