@@ -1,5 +1,6 @@
 "use client";
 
+import { useDisabled } from "@/lib/hooks";
 import { TSessionUser } from "@/lib/types";
 import { getUtcDate } from "@/lib/utils";
 import { useSession } from "next-auth/react";
@@ -19,6 +20,8 @@ const Page = () => {
 	const timeRef = useRef<HTMLInputElement | null>(null);
 	const techRef = useRef<HTMLInputElement | null>(null);
 
+	const disabled = useDisabled(user!);
+
 	const router = useRouter();
 	useEffect(() => {
 		if (session) {
@@ -27,13 +30,6 @@ const Page = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	const addScheduled = async () => {
-		// console.log(guestRef.current?.value);
-		// console.log(titleRef.current?.value);
-		// console.log(guestHandleRef.current?.value);
-		// console.log(twitterDescRef.current?.value);
-		// console.log(textDescRef.current?.value);
-		// console.log(techRef.current?.value);
-
 		// deconstructing date and time ref to construct date for db
 		const [year, month, day] = dateRef.current?.value.split("-")!;
 		const [hour, minutes] = timeRef.current?.value.split(":")!;
@@ -56,7 +52,6 @@ const Page = () => {
 		console.log(scheduled);
 		router.push("/");
 	};
-	console.log(user);
 	return (
 		<main className="w-screen  flex flex-col items-center h-screen">
 			<section className="w-full h-full md:w-10/12 flex flex-col items-center">
@@ -124,8 +119,12 @@ const Page = () => {
 							className="input input-bordered w-full max-w-xs"
 						/>
 						<button
-							className="btn mt-5"
-							disabled={user?.role !== "admin" ? true : false}
+							className={`btn mt-5 ${
+								disabled === true
+									? "disabled cursor-none bg-red-100 border-none"
+									: ""
+							}`}
+							disabled={disabled}
 							onClick={addScheduled}
 						>
 							Add Episode

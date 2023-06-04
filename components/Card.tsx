@@ -3,11 +3,12 @@
 import { Episode } from "@prisma/client";
 import { getDates } from "@/lib/utils";
 import Link from "next/link";
-// import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { AiOutlineDelete, AiFillEdit } from "react-icons/ai";
 import { useSession } from "next-auth/react";
 import { TSessionUser } from "@/lib/types";
+import { useRouter } from "next/navigation";
+import { useDisabled } from "@/lib/hooks";
 
 const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 	const [usDate, setUsDate] = useState<string>("");
@@ -16,6 +17,9 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 	const { data: session } = useSession();
 	const [guest, setGuest] = useState<Guest | null>();
 
+	const router = useRouter();
+
+	const disabled = useDisabled(user!);
 	useEffect(() => {
 		let { usDate, nzDate } = getDates(episode.date);
 		setUsDate(usDate);
@@ -24,8 +28,11 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 			setUser(session.user);
 		}
 		setGuest(episode.guest as unknown as Guest);
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	console.log(disabled);
 
 	const deleteFn = async () => {
 		await fetch("/api/episodes", {
@@ -39,6 +46,8 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 				id: episode.id,
 			}),
 		});
+
+		router.push("/");
 	};
 
 	return (
@@ -80,11 +89,16 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 					<div className="modal-action flex justify-around">
 						<label
 							htmlFor={`modal-id${episode.id}`}
-							className={"btn bg-red-500"}
+							className={`btn ${
+								disabled === true
+									? "disabled cursor-none bg-gray-200 border-none hover:bg-gray-300"
+									: ""
+							}`}
 						>
 							<button
 								onClick={deleteFn}
-								disabled={user?.role !== "admin" ? true : false}
+								disabled={disabled}
+								className={`${disabled === true ? "disabled cursor-none" : ""}`}
 							>
 								Yes
 							</button>

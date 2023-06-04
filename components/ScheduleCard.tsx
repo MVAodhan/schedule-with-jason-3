@@ -8,6 +8,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { useSession } from "next-auth/react";
 import { TSessionUser } from "@/lib/types";
 import { useRouter } from "next/navigation";
+import { useDisabled } from "@/lib/hooks";
 
 const copyText = (text: string) => {
 	navigator.clipboard.writeText(text);
@@ -18,6 +19,7 @@ const ScheduleCard = ({ episode, title }: { episode: any; title: String }) => {
 	const [user, setUser] = useState<TSessionUser | null>();
 	const { data: session } = useSession();
 	const router = useRouter();
+	const disabled = useDisabled(user!);
 
 	useEffect(() => {
 		let { usDate, nzDate } = getDates(episode.date);
@@ -48,7 +50,14 @@ const ScheduleCard = ({ episode, title }: { episode: any; title: String }) => {
 		<div className="card w-full bg-base-100 shadow-xl mx-auto ring ring-[#FF9EB1] mb-10">
 			<div className="card-body ">
 				<div className="flex justify-around">
-					<button className="btn bg-transparent" onClick={deleteFn}>
+					<button
+						className={`btn bg-transparent${
+							disabled === true
+								? "disabled cursor-none border-none hover:bg-gray-300"
+								: ""
+						}`}
+						onClick={deleteFn}
+					>
 						<AiOutlineDelete className="fill-red-700" />
 					</button>
 				</div>
