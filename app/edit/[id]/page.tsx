@@ -4,7 +4,7 @@ import Calendar from "@/components/edit-components/calendar/calendar";
 import Sanity from "@/components/edit-components/container";
 import Twitter from "@/components/edit-components/twitter/twitter";
 import Youtube from "@/components/edit-components/youtube/youtube";
-import { getDates } from "@/lib/utils";
+import { getDates } from "@/lib/my-utils";
 import { Episode } from "@prisma/client";
 
 import { useEffect, useState } from "react";

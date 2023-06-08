@@ -2,7 +2,7 @@
 
 import { useDisabled } from "@/lib/hooks";
 import { TSessionUser } from "@/lib/types";
-import { getUtcDate } from "@/lib/utils";
+import { getUtcDate } from "@/lib/my-utils";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";

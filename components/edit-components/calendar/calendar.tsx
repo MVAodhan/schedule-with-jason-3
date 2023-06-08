@@ -1,6 +1,6 @@
 "use client";
 import { Episode } from "@prisma/client";
-import { getScheduleTime, getScheduleTweet } from "@/lib/utils";
+import { getScheduleTime, getScheduleTweet } from "@/lib/my-utils";
 import { useEffect, useRef, useState } from "react";
 
 import { VscCopy } from "react-icons/vsc";

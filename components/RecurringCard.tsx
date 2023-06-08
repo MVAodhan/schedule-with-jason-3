@@ -5,10 +5,14 @@ import { getDates } from "@/lib/my-utils";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { AiOutlineDelete, AiFillEdit } from "react-icons/ai";
+
+import "react-datepicker/dist/react-datepicker.css";
+
 import { useSession } from "next-auth/react";
 import { TSessionUser } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useDisabled } from "@/lib/hooks";
+import CustomDatePicker from "./CustomDatePicker";
 
 const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 	const [usDate, setUsDate] = useState<string>("");
@@ -16,6 +20,8 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 	const [user, setUser] = useState<TSessionUser | null>();
 	const { data: session } = useSession();
 	const [guest, setGuest] = useState<Guest | null>();
+
+	const [startDate, setStartDate] = useState(new Date());
 
 	const router = useRouter();
 
@@ -70,6 +76,7 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 
 				<h2 className="card-title">{episode.title}</h2>
 				<p>Name: {guest?.name}</p>
+				<CustomDatePicker />
 				<div className="flex flex-row ">
 					<div className="w-1/2">US Date: {usDate}</div>
 					<div>NZ Date: {nzDate}</div>

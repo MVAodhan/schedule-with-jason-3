@@ -1,7 +1,7 @@
 "use client";
 
 import { TSessionUser, UpdatePayload } from "@/lib/types";
-import { getHighlightText } from "@/lib/utils";
+import { getHighlightText } from "@/lib/my-utils";
 import { Episode } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
