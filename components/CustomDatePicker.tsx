@@ -49,12 +49,17 @@ const CustomDatePicker = ({
 			type: "date",
 			date: utc,
 		};
+		console.log(utc);
+		const updated = await fetch(`/api/episode/${sanityId}`, {
+			method: "POST",
+			body: JSON.stringify(payload),
+		});
 		router.push("/");
 	};
 
 	return (
 		<DatePicker
-			// selected={selectedDateTime}
+			selected={selectedDateTime}
 			onChange={(date) => {
 				setSelectedDateTime(date!);
 			}}
