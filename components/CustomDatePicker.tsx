@@ -20,11 +20,11 @@ const CustomDatePicker = ({
 	const [selectedDateTime, setSelectedDateTime] = useState(new Date());
 
 	// eslint-disable-next-line react/display-name
-	const ExampleCustomInput = forwardRef((onClick, ref) => (
+	const ExampleCustomInput = forwardRef(() /**{onClick}, ref)*/ => (
 		<button
 			className="p-1 rounded border border-black bg-gray-50"
-			onClick={onClick}
-			ref={ref}
+			// onClick={onClick}
+			// ref={ref}
 		>
 			{/* {value} */} Select Next Airing Date
 		</button>
