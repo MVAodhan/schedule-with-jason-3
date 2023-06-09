@@ -32,8 +32,6 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	console.log(disabled);
-
 	const deleteFn = async () => {
 		await fetch("/api/episodes", {
 			method: "POST", // Specify the HTTP method

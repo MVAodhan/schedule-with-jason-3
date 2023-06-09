@@ -119,3 +119,23 @@ export const getUtcDate = (
 
 	return zonedDateTime.toInstant().toString();
 };
+
+export const getMonthValue = (monthChars: string) => {
+	const months = [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec",
+	];
+	const monthIndex = months.findIndex((el) => el === monthChars);
+
+	return monthIndex + 1;
+};
