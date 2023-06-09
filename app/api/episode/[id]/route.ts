@@ -59,5 +59,16 @@ export async function POST(request: Request) {
 			});
 			prisma.$disconnect();
 			return NextResponse.json({ message: "Chapters updated" });
+		case "date":
+			await prisma.episode.update({
+				where: {
+					id: results.data.episodeId,
+				},
+				data: {
+					date: results.data.date,
+				},
+			});
+			prisma.$disconnect();
+			return NextResponse.json({ message: "Chapters updated" });
 	}
 }

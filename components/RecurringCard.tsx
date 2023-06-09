@@ -21,8 +21,6 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 	const { data: session } = useSession();
 	const [guest, setGuest] = useState<Guest | null>();
 
-	const [startDate, setStartDate] = useState(new Date());
-
 	const router = useRouter();
 
 	const disabled = useDisabled(user!);
@@ -74,7 +72,7 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 
 				<h2 className="card-title">{episode.title}</h2>
 				<p>Name: {guest?.name}</p>
-				<CustomDatePicker />
+				<CustomDatePicker episodeId={episode.id} sanityId={episode.sanityId} />
 				<div className="flex flex-row ">
 					<div className="w-1/2">US Date: {usDate}</div>
 					<div>NZ Date: {nzDate}</div>

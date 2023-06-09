@@ -1,14 +1,22 @@
 /* eslint-disable react/display-name */
 "use client";
 
-import { getMonthValue } from "@/lib/my-utils";
+import { getMonthValue, getUtcDate } from "@/lib/my-utils";
+import { UpdatePayload } from "@/lib/types";
 import { setHours, setMinutes } from "date-fns";
+import { useRouter } from "next/navigation";
 import React, { forwardRef, useState } from "react";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-const CustomDatePicker = () => {
+const CustomDatePicker = ({
+	episodeId,
+	sanityId,
+}: {
+	episodeId: number;
+	sanityId: string;
+}) => {
 	const [selectedDateTime, setSelectedDateTime] = useState(new Date());
 
 	// eslint-disable-next-line react/display-name
@@ -18,24 +26,39 @@ const CustomDatePicker = () => {
 			onClick={onClick}
 			ref={ref}
 		>
-			{value}
+			{/* {value} */} Select Next Airing Date
 		</button>
 	));
 
-	const handleCalendarClose = () => {
+	const router = useRouter();
+
+	const handleCalendarClose = async () => {
 		const splitDate = selectedDateTime.toString().split(" ");
 		const monthChars = splitDate[1];
 		const monthValue = getMonthValue(monthChars);
 		const calDate = splitDate[2];
 		const calYear = splitDate[3];
 		const calTime = splitDate[4];
+
+		const [hour, minutes, _] = calTime.split(":");
+		const utc = getUtcDate(calYear, monthValue, calDate, hour, minutes);
+		const payload: UpdatePayload = {
+			episodeId: episodeId,
+			type: "date",
+			date: utc,
+		};
+		const updated = await fetch(`/api/episode/${sanityId}`, {
+			method: "POST",
+			body: JSON.stringify(payload),
+		});
+		router.push("/");
 	};
 
 	return (
 		<DatePicker
-			selected={selectedDateTime}
+			// selected={selectedDateTime}
 			onChange={(date) => {
-				setSelectedDateTime(date);
+				setSelectedDateTime(date!);
 			}}
 			customInput={<ExampleCustomInput />}
 			showTimeSelect
@@ -44,6 +67,7 @@ const CustomDatePicker = () => {
 			dateFormat="dd/MM/yyyy HH:mm"
 			withPortal
 			onCalendarClose={handleCalendarClose}
+			shouldCloseOnSelect={false}
 		/>
 	);
 };

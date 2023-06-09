@@ -3,7 +3,12 @@ import { z } from "zod";
 export const updateValidator = z.object({
 	episodeId: z.number(),
 	chapters: z.string().optional(),
-	type: z.union([z.literal("links"), z.literal("chapters"), z.literal("tech")]),
+	type: z.union([
+		z.literal("links"),
+		z.literal("chapters"),
+		z.literal("tech"),
+		z.literal("date"),
+	]),
 	links: z
 		.array(
 			z.object({
@@ -15,4 +20,5 @@ export const updateValidator = z.object({
 	demo: z.string().optional(),
 	repo: z.string().optional(),
 	tech: z.string().optional(),
+	date: z.string().optional(),
 });

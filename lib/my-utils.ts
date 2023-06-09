@@ -137,5 +137,5 @@ export const getMonthValue = (monthChars: string) => {
 	];
 	const monthIndex = months.findIndex((el) => el === monthChars);
 
-	return monthIndex + 1;
+	return String(monthIndex + 1);
 };

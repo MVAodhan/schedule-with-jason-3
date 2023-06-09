@@ -49,7 +49,6 @@ const Page = () => {
 			body: JSON.stringify(payload),
 		});
 
-		console.log(scheduled);
 		router.push("/");
 	};
 	return (
