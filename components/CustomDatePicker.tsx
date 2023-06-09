@@ -20,7 +20,7 @@ const CustomDatePicker = ({
 	const [selectedDateTime, setSelectedDateTime] = useState(new Date());
 
 	// eslint-disable-next-line react/display-name
-	const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+	const ExampleCustomInput = forwardRef((onClick, ref) => (
 		<button
 			className="p-1 rounded border border-black bg-gray-50"
 			onClick={onClick}
@@ -47,10 +47,6 @@ const CustomDatePicker = ({
 			type: "date",
 			date: utc,
 		};
-		const updated = await fetch(`/api/episode/${sanityId}`, {
-			method: "POST",
-			body: JSON.stringify(payload),
-		});
 		router.push("/");
 	};
 
