@@ -28,6 +28,8 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 		let { usDate, nzDate } = getDates(episode.date);
 		setUsDate(usDate);
 		setNzDate(nzDate);
+		console.log(usDate);
+		console.log(nzDate);
 		if (session) {
 			setUser(session.user);
 		}

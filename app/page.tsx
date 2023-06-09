@@ -11,7 +11,7 @@ export default function Home() {
 
 	useEffect(() => {
 		const getEpisodes = async () => {
-			const res = await fetch(`/api/episodes`);
+			const res = await fetch(`/api/episodes`, { cache: "no-store" });
 			const episodes = await res.json();
 			setEpisodes(episodes);
 		};
