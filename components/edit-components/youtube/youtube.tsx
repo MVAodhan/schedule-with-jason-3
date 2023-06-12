@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { Episode } from "@prisma/client";
 import Generation from "./generation";
+import Publishing from "./publishing";
 
 const Youtube = ({ episode }: { episode: Episode }) => {
 	const [activeTab, setActiveTab] = useState<string>("generation");
@@ -11,8 +12,7 @@ const Youtube = ({ episode }: { episode: Episode }) => {
 			case "generation":
 				return <Generation episode={episode} />;
 			default:
-				return "Publishing";
-			// return <Publishing episode={episode} />;
+				return <Publishing episode={episode} />;
 		}
 	};
 	return (

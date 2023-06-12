@@ -139,3 +139,17 @@ export const getMonthValue = (monthChars: string) => {
 
 	return String(monthIndex + 1);
 };
+
+export const getCredits = () => {
+	return `
+Watch future episodes live at https://twitch.tv/jlengstorf
+
+This episode was sponsored by:
+- Netlify (https://lwj.dev/netlify)
+- Nx (https://lwj.dev/nx)
+- New Relic (https://lwj.dev/new-relic)
+- Pluralsight (https://lwj.dev/pluralsight)
+
+Live transcription by White Coat Captioning (https://whitecoatcaptioning.com/)
+`;
+};
