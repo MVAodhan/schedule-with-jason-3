@@ -4,10 +4,13 @@ import Card from "@/components/Card";
 import RecurringCard from "@/components/RecurringCard";
 
 import { Episode } from "@prisma/client";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {
 	const [episodes, setEpisodes] = useState([]);
+
+	const router = useRouter();
 
 	useEffect(() => {
 		const getEpisodes = async () => {
@@ -20,9 +23,20 @@ export default function Home() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	const handleSync = async () => {
+		await fetch("/api/seed", { cache: "no-store" });
+
+		router.push("/");
+	};
+
 	return (
 		<main className="flex min-h-screen flex-col items-center  px-24">
 			<div className="w-full flex flex-col items-center">
+				<div className="w-full flex justify-end ">
+					<button className="shadow-xl rounded-md" onClick={handleSync}>
+						Sync with Schedule
+					</button>
+				</div>
 				<h2 className="text-2xl mb-10">Recurring Episode</h2>
 				{episodes.map((ep: Episode) => {
 					if (ep.title === "Building Web Demos + Q&A") {
