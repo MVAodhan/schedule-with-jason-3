@@ -20,7 +20,7 @@ const Tabs = [
 const Nav = () => {
 	const { data: session } = useSession();
 	return (
-		<div className="navbar bg-base-100">
+		<div className="navbar">
 			<div className="flex-1">
 				<a className="btn btn-ghost normal-case text-xl" href={"/"}>
 					SWJ 3.0

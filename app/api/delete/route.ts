@@ -3,9 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
 	const prisma = new PrismaClient();
-	const { id } = await request.json();
-	const deleted = await prisma.schedule.delete({
-		where: { id: id },
+	const body = await request.json();
+
+	console.log(body);
+	const numberId = Number(body.payload.episodeId);
+	const deleted = await prisma.episode.delete({
+		where: { id: numberId },
 	});
 
 	prisma.$disconnect();

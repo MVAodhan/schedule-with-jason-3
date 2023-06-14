@@ -8,6 +8,7 @@ export const updateValidator = z.object({
 		z.literal("chapters"),
 		z.literal("tech"),
 		z.literal("date"),
+		z.literal("delete"),
 	]),
 	links: z
 		.array(

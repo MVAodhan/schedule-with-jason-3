@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { AiOutlineDelete, AiFillEdit } from "react-icons/ai";
 import { useSession } from "next-auth/react";
-import { TSessionUser } from "@/lib/types";
+import { TSessionUser, UpdatePayload } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useDisabled } from "@/lib/hooks";
 
@@ -33,15 +33,18 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 	}, []);
 
 	const deleteFn = async () => {
-		await fetch("/api/episodes", {
+		const payload: UpdatePayload = {
+			episodeId: episode.id,
+			type: "delete",
+		};
+		await fetch(`/api/delete`, {
 			method: "POST", // Specify the HTTP method
 			headers: {
 				"Content-Type": "application/json",
-				// Set the Content-Type header
 			},
 			body: JSON.stringify({
 				// Stringify the object
-				id: episode.id,
+				payload,
 			}),
 		});
 
@@ -49,7 +52,7 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 	};
 
 	return (
-		<div className="card w-full bg-base-100 shadow-xl mx-auto ring ring-[#FF9EB1] mb-10">
+		<div className="card w-full bg-white shadow-xl mx-auto   mb-10">
 			<div className="card-body ">
 				<div className="flex justify-around">
 					<Link href={`/edit/${episode.sanityId}`}>
@@ -58,12 +61,17 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 						</button>
 					</Link>
 
-					<label
-						htmlFor={`modal-id${episode.id}`}
-						className="btn bg-transparent hover:bg-transparent"
+					<button
+						onClick={deleteFn}
+						disabled={disabled}
+						className={`${
+							disabled === true
+								? "disabled cursor-none"
+								: "btn bg-transparent hover:bg-transparent"
+						}`}
 					>
 						<AiOutlineDelete className="fill-red-700" />
-					</label>
+					</button>
 				</div>
 
 				<h2 className="card-title">{episode.title}</h2>
@@ -71,40 +79,6 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 				<div className="flex flex-row ">
 					<div className="w-1/2">US Date: {usDate}</div>
 					<div>NZ Date: {nzDate}</div>
-				</div>
-			</div>
-			<input
-				type="checkbox"
-				id={`modal-id${episode.id}`}
-				className="modal-toggle"
-			/>
-			<div className="modal">
-				<div className="modal-box">
-					<h3 className="font-bold text-lg">
-						<span className="text-red-500">Delete</span> {title}?
-					</h3>
-					<p className="py-4"></p>
-					<div className="modal-action flex justify-around">
-						<label
-							htmlFor={`modal-id${episode.id}`}
-							className={`btn ${
-								disabled === true
-									? "disabled cursor-none bg-gray-200 border-none hover:bg-gray-300"
-									: ""
-							}`}
-						>
-							<button
-								onClick={deleteFn}
-								disabled={disabled}
-								className={`${disabled === true ? "disabled cursor-none" : ""}`}
-							>
-								Yes
-							</button>
-						</label>
-						<label htmlFor={`modal-id${episode.id}`} className="btn">
-							No
-						</label>
-					</div>
 				</div>
 			</div>
 		</div>

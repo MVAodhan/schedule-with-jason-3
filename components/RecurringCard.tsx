@@ -55,7 +55,7 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 	};
 
 	return (
-		<div className="card w-full bg-base-100 shadow-xl mx-auto ring ring-[#FF9EB1] mb-10">
+		<div className="card w-full shadow-xl mx-auto  mb-10">
 			<div className="card-body ">
 				<div className="flex justify-around">
 					<Link href={`/edit/${episode.sanityId}`}>
