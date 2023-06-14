@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 
 import { useEffect, useRef, useState } from "react";
 import { VscCopy } from "react-icons/vsc";
+import { useDisabled } from "@/lib/hooks";
 
 const Twitter = ({ episode, guest }: { episode: Episode; guest: Guest }) => {
 	const copyText = (text: string) => {
@@ -19,6 +20,8 @@ const Twitter = ({ episode, guest }: { episode: Episode; guest: Guest }) => {
 	const router = useRouter();
 
 	const { data: session } = useSession();
+
+	const disabled = useDisabled(user!);
 
 	useEffect(() => {
 		if (session) {
@@ -50,12 +53,12 @@ const Twitter = ({ episode, guest }: { episode: Episode; guest: Guest }) => {
 					type="text"
 					ref={techRef}
 					placeholder="Type here"
-					className="input input-bordered w-full max-w-xs"
+					className="input input-bordered w-full max-w-xs bg-white"
 				/>
 				<button
 					className="btn btn-outline mt-5"
 					onClick={updateTech}
-					disabled={user?.role !== "admin" ? true : false}
+					disabled={disabled}
 				>
 					Update technology
 				</button>

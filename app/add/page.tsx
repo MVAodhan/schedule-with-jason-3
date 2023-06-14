@@ -52,7 +52,7 @@ const Page = () => {
 		router.push("/");
 	};
 	return (
-		<main className="w-screen  flex flex-col items-center h-screen">
+		<main className="w-screen  flex flex-col items-center ">
 			<section className="w-full h-full md:w-10/12 flex flex-col items-center">
 				<div className="ring ring-[#FF9EB1] w-[750px]  rounded-md flex flex-col items-center mt-10">
 					<div className="w-full h-full flex flex-col items-center ">
@@ -62,7 +62,7 @@ const Page = () => {
 								<input
 									ref={guestRef}
 									type="text"
-									className="input input-bordered w-full max-w-xs"
+									className="input input-bordered w-full max-w-xs bg-white"
 								/>
 							</div>
 							<div className="flex flex-col items-center justify-center w-1/2">
@@ -72,7 +72,7 @@ const Page = () => {
 								<input
 									ref={guestHandleRef}
 									type="text"
-									className="input input-bordered w-full max-w-xs"
+									className="input input-bordered w-full max-w-xs bg-white"
 								/>
 							</div>
 						</div>
@@ -81,7 +81,7 @@ const Page = () => {
 						<input
 							ref={titleRef}
 							type="text"
-							className="input input-bordered w-full max-w-xs"
+							className="input input-bordered w-full max-w-xs bg-white"
 						/>
 						<div className="w-full flex">
 							<div className="flex flex-col items-center justify-center w-1/2">
@@ -89,7 +89,7 @@ const Page = () => {
 								<input
 									ref={dateRef}
 									type="date"
-									className="input input-bordered w-full max-w-xs"
+									className="input input-bordered w-full max-w-xs bg-white"
 								/>
 							</div>
 							<div className="flex flex-col items-center justify-center w-1/2">
@@ -97,25 +97,25 @@ const Page = () => {
 								<input
 									ref={timeRef}
 									type="time"
-									className="input input-bordered w-full max-w-xs"
+									className="input input-bordered w-full max-w-xs bg-white"
 								/>
 							</div>
 						</div>
 						<label className="label"> Twitter Description</label>
 						<textarea
 							ref={twitterDescRef}
-							className="textarea textarea-bordered w-3/5"
+							className="textarea textarea-bordered w-3/5 bg-white"
 						></textarea>
 						<label className="label"> Text Description</label>
 						<textarea
 							ref={textDescRef}
-							className="textarea textarea-bordered w-3/5"
+							className="textarea textarea-bordered w-3/5 bg-white"
 						></textarea>
 						<label className="label">Technology</label>
 						<input
 							ref={techRef}
 							type="text"
-							className="input input-bordered w-full max-w-xs"
+							className="input input-bordered w-full max-w-xs bg-white"
 						/>
 						<button
 							className={`btn mt-5 ${

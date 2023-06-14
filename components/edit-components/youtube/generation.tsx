@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import LinkContainer from "./linkContainer";
 import { useSession } from "next-auth/react";
 import { UpdatePayload, TSessionUser } from "@/lib/types";
+import { useDisabled } from "@/lib/hooks";
 
 const Generation = ({ episode }: { episode: Episode }) => {
 	const chaptersRef = useRef<HTMLTextAreaElement>(null);
@@ -12,6 +13,8 @@ const Generation = ({ episode }: { episode: Episode }) => {
 	// const [episodeId, setEpisodeId] = useState<number>();
 
 	const { data: session } = useSession();
+
+	const disabled = useDisabled(user!);
 
 	useEffect(() => {
 		if (session) {
@@ -39,7 +42,7 @@ const Generation = ({ episode }: { episode: Episode }) => {
 					<div>
 						<label className="label flex justify-center">Chapters</label>
 						<textarea
-							className="textarea textarea-bordered w-full"
+							className="textarea textarea-bordered w-full bg-white"
 							placeholder="Chapters"
 							ref={chaptersRef}
 						></textarea>
@@ -47,7 +50,7 @@ const Generation = ({ episode }: { episode: Episode }) => {
 					<button
 						className="btn btn-outline mt-5"
 						onClick={updateChapters}
-						disabled={user?.role !== "admin" ? true : false}
+						disabled={disabled}
 					>
 						Update Chapters
 					</button>

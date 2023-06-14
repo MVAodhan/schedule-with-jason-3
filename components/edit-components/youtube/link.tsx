@@ -20,7 +20,7 @@ const Link = ({
 				type="text"
 				ref={linkRef}
 				placeholder="Type here"
-				className="input input-bordered w-full max-w-xs"
+				className="input input-bordered w-full max-w-xs bg-white"
 				onChange={() => {
 					handleChange(link.id, linkRef.current?.value || "");
 				}}

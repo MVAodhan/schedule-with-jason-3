@@ -52,7 +52,7 @@ const Calendar = ({
 					type="text"
 					defaultValue={title}
 					ref={titleRef}
-					className="input input-bordered w-full"
+					className="input input-bordered w-full bg-white"
 				/>
 				<VscCopy
 					className="cursor-pointer pl-1 h-8 w-8"
@@ -101,7 +101,7 @@ const Calendar = ({
 
 			<div className="flex mt-5 items-center w-full">
 				<textarea
-					className="textarea textarea-bordered w-full "
+					className="textarea textarea-bordered w-full bg-white"
 					defaultValue={episode.description}
 					ref={descRef}
 				></textarea>
@@ -119,7 +119,7 @@ const Calendar = ({
 			<div className="flex flex-col my-5 items-center w-full">
 				<label>Enter a twitter description to get sceduling tweets</label>
 				<textarea
-					className="textarea textarea-bordered w-full"
+					className="textarea textarea-bordered w-full bg-white"
 					ref={twitterDescRef}
 					onChange={() =>
 						setTwitterText(twitterDescRef.current?.value as string)

@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import Link from "./link";
+import { useDisabled } from "@/lib/hooks";
 
 const LinkContainer = ({ episode }: { episode: Episode }) => {
 	const [show, setShow] = useState<Boolean>(false);
@@ -16,6 +17,8 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
 	const [user, setUser] = useState<TSessionUser | null>();
 
 	const { data: session } = useSession();
+
+	const disabled = useDisabled(user!);
 
 	const addLink = () => {
 		setLinks([...links, { id: uuidv4(), value: "" }]);
@@ -84,7 +87,7 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
 							type="text"
 							ref={demoRef}
 							placeholder="Type here"
-							className="input input-bordered w-full max-w-xs"
+							className="input input-bordered w-full max-w-xs bg-white"
 						/>
 					</div>
 					<div className="w-full flex  items-center">
@@ -94,7 +97,7 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
 							type="text"
 							ref={repoRef}
 							placeholder="Type here"
-							className="input input-bordered w-full max-w-xs"
+							className="input input-bordered w-full max-w-xs bg-white"
 						/>
 					</div>
 				</div>
@@ -117,7 +120,7 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
 					<button
 						className="btn btn-outline"
 						onClick={updateLinks}
-						disabled={user?.role !== "admin" ? true : false}
+						disabled={disabled}
 					>
 						Update Links
 					</button>

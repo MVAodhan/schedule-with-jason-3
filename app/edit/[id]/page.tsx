@@ -63,7 +63,6 @@ const Page = ({ params }: { params: Params }) => {
 			case "twitter":
 				return <Twitter episode={episode!} guest={guest} />;
 			default:
-				// return "default";
 				return (
 					<Sanity
 						episode={episode!}
@@ -75,7 +74,7 @@ const Page = ({ params }: { params: Params }) => {
 		}
 	};
 	return (
-		<main className="w-screen  flex flex-col items-center h-screen">
+		<main className="w-screen  flex flex-col items-center">
 			<section className="w-full h-full md:w-10/12 flex flex-col items-center">
 				<div className="tabs tabs-boxed  justify-center bg-[#FFFFFF]">
 					<div>
@@ -90,7 +89,7 @@ const Page = ({ params }: { params: Params }) => {
 						))}
 					</div>
 				</div>
-				<div className="ring ring-[#FF9EB1] w-[750px]  rounded-md flex flex-col items-center mt-10">
+				<div className="w-[750px]  rounded-md flex flex-col items-center mt-10">
 					{episode && renderTab()}
 				</div>
 			</section>
