@@ -29,7 +29,8 @@
 		"**/*.tsx",
 		".next/types/**/*.ts",
 		"components/edit-components/calendar",
-		"lib/images/index.js"
+		"lib/images/index.js",
+		"typings.d.ts"
 	],
 	"exclude": ["node_modules"]
 }
