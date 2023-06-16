@@ -8,3 +8,11 @@ interface Guest {
 	image: string;
 	name: string;
 }
+
+declare global {
+	namespace NodeJS {
+		interface Global {
+			prisma: PrismaClient;
+		}
+	}
+}

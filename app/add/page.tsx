@@ -5,11 +5,10 @@ import { TSessionUser } from "@/lib/types";
 import { getUtcDate } from "@/lib/my-utils";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Page = () => {
 	const [user, setUser] = useState<TSessionUser | null>();
-
 	const { data: session } = useSession();
 	const guestRef = useRef<HTMLInputElement | null>(null);
 	const titleRef = useRef<HTMLInputElement | null>(null);
@@ -54,7 +53,7 @@ const Page = () => {
 	return (
 		<main className="w-screen  flex flex-col items-center ">
 			<section className="w-full h-full md:w-10/12 flex flex-col items-center">
-				<div className="ring ring-[#FF9EB1] w-[750px]  rounded-md flex flex-col items-center mt-10">
+				<div className="w-[750px]  rounded-md flex flex-col items-center mt-10">
 					<div className="w-full h-full flex flex-col items-center ">
 						<div className="w-full flex">
 							<div className="flex flex-col items-center justify-center w-1/2">

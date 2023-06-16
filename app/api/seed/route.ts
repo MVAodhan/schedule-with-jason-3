@@ -1,10 +1,13 @@
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 export async function GET() {
 	// Get episodes from lwj api
-	let res = await fetch("https://www.learnwithjason.dev/api/v2/schedule");
+	let res = await fetch("https://www.learnwithjason.dev/api/v2/schedule", {
+		cache: "no-store",
+	});
 	const episodes = await res.json();
 	// Gets all the episodes in the DB
 	let episodesInDB = await prisma.episode.findMany();

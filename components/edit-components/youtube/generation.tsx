@@ -36,7 +36,7 @@ const Generation = ({ episode }: { episode: Episode }) => {
 		});
 	};
 	return (
-		<div className="w-full flex justify-center h-[800px]">
+		<div className="w-full flex justify-center h-full">
 			<div className="w-4/5 flex items-center  h-[400px]">
 				<div className=" w-1/2  flex flex-col item-center justify-between h-full">
 					<div>

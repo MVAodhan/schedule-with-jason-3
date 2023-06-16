@@ -2,16 +2,22 @@
 
 import Card from "@/components/Card";
 import RecurringCard from "@/components/RecurringCard";
+import { useDisabled } from "@/lib/hooks";
+import { TSessionUser } from "@/lib/types";
 
 import { Episode } from "@prisma/client";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {
 	const [episodes, setEpisodes] = useState([]);
+	const [user, setUser] = useState<TSessionUser | null>();
 
 	const router = useRouter();
 
+	const { data: session } = useSession();
+	const disabled = useDisabled(user!);
 	useEffect(() => {
 		const getEpisodes = async () => {
 			const res = await fetch(`/api/episodes`, { cache: "no-store" });
@@ -19,13 +25,18 @@ export default function Home() {
 			setEpisodes(episodes);
 		};
 		getEpisodes();
+		if (session) {
+			setUser(session.user);
+		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleSync = async () => {
-		await fetch("/api/seed", { cache: "no-store" });
-
+		const res = await fetch("/api/seed", { cache: "no-store" });
+		const data = await res.json();
+		console.log(data);
+		// setEpisodes([...episodes]); spread data in later
 		router.push("/");
 	};
 
@@ -33,7 +44,11 @@ export default function Home() {
 		<main className="flex min-h-screen flex-col items-center  px-24">
 			<div className="w-full flex flex-col items-center">
 				<div className="w-full flex justify-end ">
-					<button className="shadow-xl rounded-md" onClick={handleSync}>
+					<button
+						className="shadow-xl rounded-md"
+						onClick={handleSync}
+						disabled={disabled}
+					>
 						Sync with Schedule
 					</button>
 				</div>
