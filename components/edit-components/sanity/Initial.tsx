@@ -26,19 +26,21 @@ const Initial = ({
 		}
 	};
 	return (
-		<>
-			<div className="flex h-full">
-				<div className="mt-5 flex justify-center">
-					US Date: {usDate ? usDate : "no date"}
-				</div>
-				<div className="mt-5 pl-10">NZ Date: {nzDate ? nzDate : "no date"}</div>
+		<div className="w-full">
+			<div className="flex items-center w-full justify-around m-2">
+				<div>US Date</div>
+				<div>{usDate ? usDate : "no date"}</div>
 			</div>
-			<div className="flex mt-1 items-center w-full">
+			<div className="flex items-center w-full justify-around m-2">
+				<div>NZ Date</div>
+				<div>{nzDate ? nzDate : "no date"}</div>
+			</div>
+			<div className="flex items-center w-full justify-around">
 				<input
 					type="text"
 					defaultValue={episode.title}
 					ref={titleRef}
-					className="input input-bordered w-full bg-white"
+					className="input input-bordered  bg-white"
 				/>
 				<VscCopy
 					className="cursor-pointer pl-1 h-8 w-8"
@@ -61,7 +63,7 @@ const Initial = ({
 					}}
 				/>
 			</div>
-			<div className="flex my-1 items-center w-full">
+			<div className="flex items-center justify-center w-full mt-1">
 				<textarea
 					className="textarea textarea-bordered w-full bg-white"
 					defaultValue={episode.description}
@@ -74,7 +76,7 @@ const Initial = ({
 					}}
 				/>
 			</div>
-		</>
+		</div>
 	);
 };
 

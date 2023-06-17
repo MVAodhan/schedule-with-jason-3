@@ -70,7 +70,7 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
 					<span className="label-text mr-10">Add Repo & Demo</span>
 					<input
 						type="checkbox"
-						className="toggle"
+						className="toggle bg-white"
 						onChange={() => {
 							setShow(!show);
 						}}
