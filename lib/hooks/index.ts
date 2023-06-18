@@ -1,12 +1,18 @@
-import { TSessionUser } from "../types";
+import { useSession } from "next-auth/react";
 
-export const useDisabled = (user: TSessionUser) => {
-    let disabled = true;
-		if (
-			process.env.NEXT_PUBLIC_ENVIRONMENT === "Development" ||
-			user?.role === "admin"
-		) {
-			disabled = false;
-		}
-		return disabled;
+export const useDisabled = () => {
+	const { data: session } = useSession();
+
+	const userRole = session?.user?.role;
+	let disabled: boolean;
+	if (
+		process.env.NEXT_PUBLIC_ENVIRONMENT === "Development" ||
+		userRole === "admin"
+	) {
+		disabled = false;
+	} else {
+		disabled = true;
+	}
+
+	return disabled;
 };

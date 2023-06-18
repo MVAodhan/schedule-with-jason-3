@@ -16,18 +16,16 @@ const copyText = (text: string) => {
 const ScheduleCard = ({ episode, title }: { episode: any; title: String }) => {
 	const [usDate, setUsDate] = useState<string>("");
 	const [nzDate, setNzDate] = useState<string>("");
-	const [user, setUser] = useState<TSessionUser | null>();
+
 	const { data: session } = useSession();
 	const router = useRouter();
-	const disabled = useDisabled(user!);
+	const disabled = useDisabled();
 
 	useEffect(() => {
 		let { usDate, nzDate } = getDates(episode.date);
 		setUsDate(usDate);
 		setNzDate(nzDate);
-		if (session) {
-			setUser(session.user);
-		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

@@ -15,20 +15,12 @@ const Twitter = ({ episode, guest }: { episode: Episode; guest: Guest }) => {
 		navigator.clipboard.writeText(text);
 	};
 
-	const [user, setUser] = useState<TSessionUser | null>();
 	const techRef = useRef<HTMLInputElement>(null);
 	const router = useRouter();
 
 	const { data: session } = useSession();
 
-	const disabled = useDisabled(user!);
-
-	useEffect(() => {
-		if (session) {
-			setUser(session.user);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	const disabled = useDisabled();
 
 	const updateTech = async () => {
 		let episodeId = episode.id;

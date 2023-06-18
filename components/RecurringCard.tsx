@@ -17,22 +17,20 @@ import CustomDatePicker from "./CustomDatePicker";
 const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 	const [usDate, setUsDate] = useState<string>("");
 	const [nzDate, setNzDate] = useState<string>("");
-	const [user, setUser] = useState<TSessionUser | null>();
+
 	const { data: session } = useSession();
 	const [guest, setGuest] = useState<Guest | null>();
 
 	const router = useRouter();
 
-	const disabled = useDisabled(user!);
+	const disabled = useDisabled();
 	useEffect(() => {
 		let { usDate, nzDate } = getDates(episode.date);
 		setUsDate(usDate);
 		setNzDate(nzDate);
 		console.log(usDate);
 		console.log(nzDate);
-		if (session) {
-			setUser(session.user);
-		}
+
 		setGuest(episode.guest as unknown as Guest);
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps

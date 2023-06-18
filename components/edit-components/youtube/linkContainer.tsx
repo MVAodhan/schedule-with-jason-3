@@ -14,11 +14,10 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
 
 	const demoRef = useRef<HTMLInputElement>(null);
 	const repoRef = useRef<HTMLInputElement>(null);
-	const [user, setUser] = useState<TSessionUser | null>();
 
 	const { data: session } = useSession();
 
-	const disabled = useDisabled(user!);
+	const disabled = useDisabled();
 
 	const addLink = () => {
 		setLinks([...links, { id: uuidv4(), value: "" }]);
@@ -28,9 +27,7 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
 		if (episode.links) {
 			setLinks(episode.links);
 		}
-		if (session) {
-			setUser(session.user);
-		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	const handleLinkChange = (id: string, newValue: string) => {

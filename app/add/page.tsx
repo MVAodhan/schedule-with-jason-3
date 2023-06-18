@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const Page = () => {
-	const [user, setUser] = useState<TSessionUser | null>();
 	const { data: session } = useSession();
 	const guestRef = useRef<HTMLInputElement | null>(null);
 	const titleRef = useRef<HTMLInputElement | null>(null);
@@ -19,17 +18,10 @@ const Page = () => {
 	const timeRef = useRef<HTMLInputElement | null>(null);
 	const techRef = useRef<HTMLInputElement | null>(null);
 
-	const disabled = useDisabled(user!);
+	const disabled = useDisabled();
 
 	const router = useRouter();
-	useEffect(() => {
-		if (session) {
-			setUser(session?.user);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 
-	console.log(user);
 	const addScheduled = async () => {
 		// deconstructing date and time ref to construct date for db
 		const [year, month, day] = dateRef.current?.value.split("-")!;

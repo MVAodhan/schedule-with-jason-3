@@ -10,23 +10,14 @@ import { useRouter } from "next/navigation";
 
 const Generation = ({ episode }: { episode: Episode }) => {
 	const chaptersRef = useRef<HTMLTextAreaElement>(null);
-	const [user, setUser] = useState<TSessionUser | null>();
+
 	// const [episodeId, setEpisodeId] = useState<number>();
 
 	const { data: session } = useSession();
 
-	const disabled = useDisabled(user!);
+	const disabled = useDisabled();
 
 	const router = useRouter();
-
-	useEffect(() => {
-		if (session) {
-			setUser(session.user);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	console.log(user);
 
 	const updateChapters = async () => {
 		let episodeId = episode.id;

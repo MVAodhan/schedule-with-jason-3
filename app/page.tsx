@@ -6,16 +6,14 @@ import { useDisabled } from "@/lib/hooks";
 import { TSessionUser } from "@/lib/types";
 
 import { Episode } from "@prisma/client";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {
 	const [episodes, setEpisodes] = useState<Episode[] | null>([]);
-	const [user, setUser] = useState<TSessionUser | null>();
 
-	const { data: session } = useSession();
-	const disabled = useDisabled(user!);
+	// const { data: session } = useSession();
+	const disabled = useDisabled();
+
 	useEffect(() => {
 		const getEpisodes = async () => {
 			const res = await fetch(`/api/episodes`, { cache: "no-store" });
@@ -23,9 +21,6 @@ export default function Home() {
 			setEpisodes(episodes);
 		};
 		getEpisodes();
-		if (session) {
-			setUser(session.user);
-		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -37,14 +32,12 @@ export default function Home() {
 		setEpisodes(newEpisodes);
 	};
 
-	console.log(user);
-
 	return (
 		<main className="flex min-h-screen flex-col items-center  px-24">
 			<div className="w-full flex flex-col items-center">
 				<div className="w-full flex justify-end ">
 					<button
-						className="shadow-xl rounded-md"
+						className="rounded-md text-black bg-white shadow-xl p-3 cursor-pointer"
 						onClick={handleSync}
 						disabled={disabled}
 					>
