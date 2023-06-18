@@ -56,6 +56,6 @@ export async function GET() {
 	prisma.$disconnect();
 
 	return NextResponse.json({
-		message: "success",
+		episodesToAdd,
 	});
 }

@@ -11,10 +11,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-	const [episodes, setEpisodes] = useState([]);
+	const [episodes, setEpisodes] = useState<Episode[] | null>([]);
 	const [user, setUser] = useState<TSessionUser | null>();
-
-	const router = useRouter();
 
 	const { data: session } = useSession();
 	const disabled = useDisabled(user!);
@@ -34,10 +32,9 @@ export default function Home() {
 
 	const handleSync = async () => {
 		const res = await fetch("/api/seed", { cache: "no-store" });
-		const data = await res.json();
-		console.log(data);
-		// setEpisodes([...episodes]); spread data in later
-		router.push("/");
+		const { episodesToAdd } = await res.json();
+		const newEpisodes = [...episodes!, ...episodesToAdd];
+		setEpisodes(newEpisodes);
 	};
 
 	return (
@@ -53,7 +50,7 @@ export default function Home() {
 					</button>
 				</div>
 				<h2 className="text-2xl mb-10">Recurring Episode</h2>
-				{episodes.map((ep: Episode) => {
+				{episodes!.map((ep: Episode) => {
 					if (ep.title === "Building Web Demos + Q&A") {
 						return (
 							<RecurringCard key={ep.sanityId} episode={ep} title={ep.title} />
@@ -63,7 +60,7 @@ export default function Home() {
 			</div>
 			<div className="w-full flex flex-col items-center">
 				<h2 className="text-2xl mb-10">Episodes</h2>
-				{episodes.map((ep: Episode) => {
+				{episodes!.map((ep: Episode) => {
 					if (ep.title !== "Building Web Demos + Q&A") {
 						return <Card key={ep.sanityId} episode={ep} title={ep.title} />;
 					}
