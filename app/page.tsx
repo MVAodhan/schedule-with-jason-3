@@ -37,6 +37,8 @@ export default function Home() {
 		setEpisodes(newEpisodes);
 	};
 
+	console.log(user);
+
 	return (
 		<main className="flex min-h-screen flex-col items-center  px-24">
 			<div className="w-full flex flex-col items-center">

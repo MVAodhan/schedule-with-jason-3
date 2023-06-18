@@ -6,6 +6,7 @@ import LinkContainer from "./linkContainer";
 import { useSession } from "next-auth/react";
 import { UpdatePayload, TSessionUser } from "@/lib/types";
 import { useDisabled } from "@/lib/hooks";
+import { useRouter } from "next/navigation";
 
 const Generation = ({ episode }: { episode: Episode }) => {
 	const chaptersRef = useRef<HTMLTextAreaElement>(null);
@@ -16,12 +17,16 @@ const Generation = ({ episode }: { episode: Episode }) => {
 
 	const disabled = useDisabled(user!);
 
+	const router = useRouter();
+
 	useEffect(() => {
 		if (session) {
 			setUser(session.user);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	console.log(user);
 
 	const updateChapters = async () => {
 		let episodeId = episode.id;
@@ -34,6 +39,8 @@ const Generation = ({ episode }: { episode: Episode }) => {
 			method: "POST",
 			body: JSON.stringify(payload),
 		});
+
+		router.push("/");
 	};
 	return (
 		<div className="w-full flex justify-center h-full">
@@ -48,7 +55,9 @@ const Generation = ({ episode }: { episode: Episode }) => {
 						></textarea>
 					</div>
 					<button
-						className="btn btn-outline mt-5"
+						className={`btn btn-outline mt-5 bg-blue-700 text-white ${
+							disabled ? "disable bg-grey-100" : ""
+						}`}
 						onClick={updateChapters}
 						disabled={disabled}
 					>
