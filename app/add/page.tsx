@@ -28,6 +28,8 @@ const Page = () => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	console.log(user);
 	const addScheduled = async () => {
 		// deconstructing date and time ref to construct date for db
 		const [year, month, day] = dateRef.current?.value.split("-")!;
@@ -52,7 +54,7 @@ const Page = () => {
 	};
 	return (
 		<main className="w-screen  flex flex-col items-center ">
-			<section className="w-full h-full md:w-10/12 flex flex-col items-center">
+			<section className="w-full  md:w-10/12 flex flex-col items-center">
 				<div className="w-[750px]  rounded-md flex flex-col items-center mt-10">
 					<div className="w-full h-full flex flex-col items-center ">
 						<div className="w-full flex">
