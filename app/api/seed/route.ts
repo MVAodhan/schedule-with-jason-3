@@ -47,7 +47,7 @@ export async function GET() {
 	});
 
 	// // // For each of the episodes from the Sanity api, it checks if the sanityId is in the DB, if not, it adds it to the the DB
-	episodesToAdd.forEach((episode: any) => {
+	await episodesToAdd.forEach((episode: any) => {
 		if (!sanittyIDsInDB.includes(episode.id)) {
 			createEpisode(episode);
 		}
