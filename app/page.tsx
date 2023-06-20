@@ -3,9 +3,9 @@
 import Card from "@/components/Card";
 import RecurringCard from "@/components/RecurringCard";
 import { useDisabled } from "@/lib/hooks";
-import { TSessionUser } from "@/lib/types";
 
 import { Episode } from "@prisma/client";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -14,6 +14,7 @@ export default function Home() {
 	// const { data: session } = useSession();
 	const disabled = useDisabled();
 
+	const router = useRouter();
 	useEffect(() => {
 		const getEpisodes = async () => {
 			const res = await fetch(`/api/episodes`, { cache: "no-store" });
@@ -27,9 +28,7 @@ export default function Home() {
 
 	const handleSync = async () => {
 		const res = await fetch("/api/seed", { cache: "no-store" });
-		const { episodesToAdd } = await res.json();
-		const newEpisodes = [...episodes!, ...episodesToAdd];
-		setEpisodes(newEpisodes);
+		router.push("/");
 	};
 
 	return (

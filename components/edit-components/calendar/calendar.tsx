@@ -130,60 +130,59 @@ const Calendar = ({
 					defaultValue={twitterDescDafault}
 				></textarea>
 			</div>
-			{twitterText.length > 1 ||
-				(twitterDescDafault.length > 1 && (
-					<>
-						<div className="w-full mt-10 mb-10 flex justify-between">
-							<div className="flex flex-col items-center">
-								{twoWeeks}
-								<div className="flex">
-									<label className="label">Two Weeks</label>
-									<VscCopy
-										className="cursor-pointer pl-1 h-8 w-8"
-										onClick={() => {
-											let tweet = getScheduleTweet(
-												"twoWeeks",
-												twitterText,
-												episode.uri
-											);
-											navigator.clipboard.writeText(tweet);
-										}}
-									/>
-								</div>
-							</div>
-							<div className="flex flex-col items-center">
-								<div className="flex ">
-									<label className="label">90 Mins</label>
-									<VscCopy
-										className="cursor-pointer pl-1 h-8 w-8"
-										onClick={() => {
-											let tweet = getScheduleTweet(
-												"ninetyMinutes",
-												twitterText,
-												episode.uri
-											);
-											navigator.clipboard.writeText(tweet);
-										}}
-									/>
-								</div>
-								{ninetyMinutes}
-							</div>
-							<div className="flex flex-col items-center ">
-								{usDate}
-								<div className="flex ">
-									<label className="label">Live</label>
-									<VscCopy
-										className="cursor-pointer pl-1 h-8 w-8"
-										onClick={() => {
-											let tweet = getScheduleTweet("Live", twitterText);
-											navigator.clipboard.writeText(tweet);
-										}}
-									/>
-								</div>
+			{(twitterText.length > 1 || twitterDescDafault.length > 1) && (
+				<>
+					<div className="w-full mt-10 mb-10 flex justify-between">
+						<div className="flex flex-col items-center">
+							{twoWeeks}
+							<div className="flex">
+								<label className="label">Two Weeks</label>
+								<VscCopy
+									className="cursor-pointer pl-1 h-8 w-8"
+									onClick={() => {
+										let tweet = getScheduleTweet(
+											"twoWeeks",
+											twitterText,
+											episode.uri
+										);
+										navigator.clipboard.writeText(tweet);
+									}}
+								/>
 							</div>
 						</div>
-					</>
-				))}
+						<div className="flex flex-col items-center">
+							<div className="flex ">
+								<label className="label">90 Mins</label>
+								<VscCopy
+									className="cursor-pointer pl-1 h-8 w-8"
+									onClick={() => {
+										let tweet = getScheduleTweet(
+											"ninetyMinutes",
+											twitterText,
+											episode.uri
+										);
+										navigator.clipboard.writeText(tweet);
+									}}
+								/>
+							</div>
+							{ninetyMinutes}
+						</div>
+						<div className="flex flex-col items-center ">
+							{usDate}
+							<div className="flex ">
+								<label className="label">Live</label>
+								<VscCopy
+									className="cursor-pointer pl-1 h-8 w-8"
+									onClick={() => {
+										let tweet = getScheduleTweet("Live", twitterText);
+										navigator.clipboard.writeText(tweet);
+									}}
+								/>
+							</div>
+						</div>
+					</div>
+				</>
+			)}
 		</div>
 	);
 };
