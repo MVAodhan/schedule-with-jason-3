@@ -9,7 +9,6 @@ import { AiOutlineDelete, AiFillEdit } from "react-icons/ai";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { useSession } from "next-auth/react";
-import { TSessionUser } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useDisabled } from "@/lib/hooks";
 import CustomDatePicker from "./CustomDatePicker";
@@ -18,7 +17,6 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 	const [usDate, setUsDate] = useState<string>("");
 	const [nzDate, setNzDate] = useState<string>("");
 
-	const { data: session } = useSession();
 	const [guest, setGuest] = useState<Guest | null>();
 
 	const router = useRouter();
@@ -72,10 +70,19 @@ const Card = ({ episode, title }: { episode: Episode; title: String }) => {
 
 				<h2 className="card-title">{episode.title}</h2>
 				<p>Name: {guest?.name}</p>
-				<CustomDatePicker episodeId={episode.id} sanityId={episode.sanityId} />
+
 				<div className="flex flex-row ">
-					<div className="w-1/2">US Date: {usDate}</div>
-					<div>NZ Date: {nzDate}</div>
+					<div className="w-1/2 flex items-center">
+						US Date:{" "}
+						<CustomDatePicker
+							episodeId={episode.id}
+							sanityId={episode.sanityId}
+							utcDate={episode.date}
+						/>
+					</div>
+					<div className="w-1/2 flex items-center">
+						NZ Date: <span className="ml-2">{nzDate}</span>
+					</div>
 				</div>
 			</div>
 			<input

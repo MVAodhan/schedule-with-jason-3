@@ -6,15 +6,14 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { AiOutlineDelete, AiFillEdit } from "react-icons/ai";
 import { useSession } from "next-auth/react";
-import { TSessionUser, UpdatePayload } from "@/lib/types";
+import { UpdatePayload } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useDisabled } from "@/lib/hooks";
 
-const Card = ({ episode, title }: { episode: Episode; title: String }) => {
+const Card = ({ episode }: { episode: Episode }) => {
 	const [usDate, setUsDate] = useState<string>("");
 	const [nzDate, setNzDate] = useState<string>("");
 
-	const { data: session } = useSession();
 	const [guest, setGuest] = useState<Guest | null>();
 
 	const router = useRouter();

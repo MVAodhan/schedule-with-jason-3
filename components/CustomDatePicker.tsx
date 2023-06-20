@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 "use client";
 
-import { getMonthValue, getUtcDate } from "@/lib/my-utils";
+import { getDates, getMonthValue, getUtcDate } from "@/lib/my-utils";
 import { UpdatePayload } from "@/lib/types";
 import { setHours, setMinutes } from "date-fns";
 import { useRouter } from "next/navigation";
@@ -13,21 +13,25 @@ import "react-datepicker/dist/react-datepicker.css";
 const CustomDatePicker = ({
 	episodeId,
 	sanityId,
+	utcDate,
 }: {
 	episodeId: number;
 	sanityId: string;
+	utcDate: string;
 }) => {
 	const [selectedDateTime, setSelectedDateTime] = useState(new Date());
+
+	let { usDate } = getDates(utcDate);
 
 	// eslint-disable-next-line react/display-name
 	const ExampleCustomInput = forwardRef(
 		({ onClick }: { onClick?: any }, ref: any) => (
 			<button
-				className="p-1 rounded border border-black bg-gray-50"
+				className="p-1 ml-2 rounded  border-black bg-white shadow-xl"
 				onClick={onClick}
 				ref={ref}
 			>
-				{/* {value} */} Select Next Airing Date
+				{usDate}
 			</button>
 		)
 	);

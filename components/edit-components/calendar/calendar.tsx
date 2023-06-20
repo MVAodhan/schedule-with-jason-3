@@ -4,7 +4,6 @@ import { getScheduleTime, getScheduleTweet } from "@/lib/my-utils";
 import { useEffect, useRef, useState } from "react";
 
 import { VscCopy } from "react-icons/vsc";
-import { useSession } from "next-auth/react";
 
 const Calendar = ({
 	episode,
@@ -29,6 +28,7 @@ const Calendar = ({
 
 	const [twoWeeks, setTwoWeeks] = useState<string>("");
 	const [ninetyMinutes, setNinetyMinutes] = useState<string>("");
+	const [twitterDescDafault, setTwitterDescDefault] = useState<string>("");
 
 	const copyValue = (ref: any) => {
 		if (ref.current?.value !== null) {
@@ -37,11 +37,14 @@ const Calendar = ({
 		}
 	};
 
-	const { data: session } = useSession();
+	console.log(episode.twitter_description);
 
 	useEffect(() => {
 		setTwoWeeks(getScheduleTime(episode.date));
 		setNinetyMinutes(getScheduleTime(episode.date, "ninetyMinutes"));
+		if (episode.twitter_description) {
+			setTwitterDescDefault(episode.twitter_description);
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -124,61 +127,63 @@ const Calendar = ({
 					onChange={() =>
 						setTwitterText(twitterDescRef.current?.value as string)
 					}
+					defaultValue={twitterDescDafault}
 				></textarea>
 			</div>
-			{twitterText.length > 1 && (
-				<>
-					<div className="w-full mt-10 mb-10 flex justify-between">
-						<div className="flex flex-col items-center">
-							{twoWeeks}
-							<div className="flex">
-								<label className="label">Two Weeks</label>
-								<VscCopy
-									className="cursor-pointer pl-1 h-8 w-8"
-									onClick={() => {
-										let tweet = getScheduleTweet(
-											"twoWeeks",
-											twitterText,
-											episode.uri
-										);
-										navigator.clipboard.writeText(tweet);
-									}}
-								/>
+			{twitterText.length > 1 ||
+				(twitterDescDafault.length > 1 && (
+					<>
+						<div className="w-full mt-10 mb-10 flex justify-between">
+							<div className="flex flex-col items-center">
+								{twoWeeks}
+								<div className="flex">
+									<label className="label">Two Weeks</label>
+									<VscCopy
+										className="cursor-pointer pl-1 h-8 w-8"
+										onClick={() => {
+											let tweet = getScheduleTweet(
+												"twoWeeks",
+												twitterText,
+												episode.uri
+											);
+											navigator.clipboard.writeText(tweet);
+										}}
+									/>
+								</div>
+							</div>
+							<div className="flex flex-col items-center">
+								<div className="flex ">
+									<label className="label">90 Mins</label>
+									<VscCopy
+										className="cursor-pointer pl-1 h-8 w-8"
+										onClick={() => {
+											let tweet = getScheduleTweet(
+												"ninetyMinutes",
+												twitterText,
+												episode.uri
+											);
+											navigator.clipboard.writeText(tweet);
+										}}
+									/>
+								</div>
+								{ninetyMinutes}
+							</div>
+							<div className="flex flex-col items-center ">
+								{usDate}
+								<div className="flex ">
+									<label className="label">Live</label>
+									<VscCopy
+										className="cursor-pointer pl-1 h-8 w-8"
+										onClick={() => {
+											let tweet = getScheduleTweet("Live", twitterText);
+											navigator.clipboard.writeText(tweet);
+										}}
+									/>
+								</div>
 							</div>
 						</div>
-						<div className="flex flex-col items-center">
-							<div className="flex ">
-								<label className="label">90 Mins</label>
-								<VscCopy
-									className="cursor-pointer pl-1 h-8 w-8"
-									onClick={() => {
-										let tweet = getScheduleTweet(
-											"ninetyMinutes",
-											twitterText,
-											episode.uri
-										);
-										navigator.clipboard.writeText(tweet);
-									}}
-								/>
-							</div>
-							{ninetyMinutes}
-						</div>
-						<div className="flex flex-col items-center ">
-							{usDate}
-							<div className="flex ">
-								<label className="label">Live</label>
-								<VscCopy
-									className="cursor-pointer pl-1 h-8 w-8"
-									onClick={() => {
-										let tweet = getScheduleTweet("Live", twitterText);
-										navigator.clipboard.writeText(tweet);
-									}}
-								/>
-							</div>
-						</div>
-					</div>
-				</>
-			)}
+					</>
+				))}
 		</div>
 	);
 };
