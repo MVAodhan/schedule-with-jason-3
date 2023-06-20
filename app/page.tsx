@@ -57,7 +57,7 @@ export default function Home() {
 				<h2 className="text-2xl mb-10">Episodes</h2>
 				{episodes!.map((ep: Episode) => {
 					if (ep.title !== "Building Web Demos + Q&A") {
-						return <Card key={ep.sanityId} episode={ep} title={ep.title} />;
+						return <Card key={ep.sanityId} episode={ep} />;
 					}
 				})}
 			</div>
