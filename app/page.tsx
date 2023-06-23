@@ -32,18 +32,18 @@ export default function Home() {
 	};
 
 	return (
-		<main className="flex min-h-screen flex-col items-center  px-24">
+		<main className="flex min-h-screen flex-col items-center px-24 bg-slate-50">
 			<div className="w-full flex flex-col items-center">
 				<div className="w-full flex justify-end ">
 					<button
-						className="rounded-md text-black bg-white shadow-xl p-3 cursor-pointer"
+						className="rounded-md text-black bg-gray-100 shadow-xl p-3 cursor-pointer"
 						onClick={handleSync}
 						disabled={disabled}
 					>
 						Sync with Schedule
 					</button>
 				</div>
-				<h2 className="text-2xl mb-10">Recurring Episode</h2>
+				<h2 className="text-2xl font-semibold  mb-5">Recurring Episode</h2>
 				{episodes!.map((ep: Episode) => {
 					if (ep.title === "Building Web Demos + Q&A") {
 						return (
@@ -53,7 +53,7 @@ export default function Home() {
 				})}
 			</div>
 			<div className="w-full flex flex-col items-center">
-				<h2 className="text-2xl mb-10">Episodes</h2>
+				<h2 className="text-2xl font-semibold  mb-5">Episodes</h2>
 				{episodes!.map((ep: Episode) => {
 					if (ep.title !== "Building Web Demos + Q&A") {
 						return <Card key={ep.sanityId} episode={ep} />;

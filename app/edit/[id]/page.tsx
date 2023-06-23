@@ -74,14 +74,16 @@ const Page = ({ params }: { params: Params }) => {
 		}
 	};
 	return (
-		<main className="w-screen h-screen flex flex-col items-center">
+		<main className="w-screen h-screen flex flex-col items-center bg-slate-50">
 			<section className="w-3/5 h-full  flex flex-col items-center  ">
-				<div className="tabs tabs-boxed  justify-center bg-[#FFFFFF]">
+				<div className="tabs tabs-boxed  justify-center bg-slate-50">
 					<div>
 						{tabs.map((tab, i) => (
 							<a
 								key={i}
-								className={`tab ${tab.id === activeTab ? "tab-active" : ""}`}
+								className={`tab bg-slate-50 ${
+									tab.id === activeTab ? "tab-active" : ""
+								}`}
 								onClick={() => setActiveTab(tab.id)}
 							>
 								{tab.header}

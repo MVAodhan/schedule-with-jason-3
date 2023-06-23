@@ -40,7 +40,7 @@ const Initial = ({
 					type="text"
 					defaultValue={episode.title}
 					ref={titleRef}
-					className="input input-bordered  bg-white"
+					className="input input-bordered bg-slate-50"
 				/>
 				<VscCopy
 					className="cursor-pointer pl-1 h-8 w-8"
@@ -54,7 +54,7 @@ const Initial = ({
 					type="text"
 					defaultValue={guest.name}
 					ref={nameRef}
-					className="input input-bordered bg-white"
+					className="input input-bordered bg-slate-50"
 				/>
 				<VscCopy
 					className="cursor-pointer pl-1 h-8 w-8"
@@ -65,7 +65,7 @@ const Initial = ({
 			</div>
 			<div className="flex items-center justify-center w-full mt-1">
 				<textarea
-					className="textarea textarea-bordered w-full bg-white"
+					className="textarea textarea-bordered w-full bg-slate-50"
 					defaultValue={episode.description}
 					ref={descRef}
 				></textarea>

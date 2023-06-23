@@ -1,8 +1,8 @@
 /* eslint-disable react/display-name */
 "use client";
 
-import { getDates, getMonthValue, getUtcDate } from "@/lib/my-utils";
-import { UpdatePayload } from "@/lib/types";
+import { getMonthValue, getUtcDate } from "@/lib/my-utils";
+
 import { setHours, setMinutes } from "date-fns";
 import { useRouter } from "next/navigation";
 import React, { forwardRef, useState } from "react";
@@ -10,18 +10,8 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-const CustomDatePicker = ({
-	episodeId,
-	sanityId,
-	utcDate,
-}: {
-	episodeId: number;
-	sanityId: string;
-	utcDate: string;
-}) => {
+const CustomDatePicker = ({ setAddDateTime }: { setAddDateTime: any }) => {
 	const [selectedDateTime, setSelectedDateTime] = useState(new Date());
-
-	let { usDate } = getDates(utcDate);
 
 	// eslint-disable-next-line react/display-name
 	const ExampleCustomInput = forwardRef(
@@ -31,7 +21,7 @@ const CustomDatePicker = ({
 				onClick={onClick}
 				ref={ref}
 			>
-				{usDate}
+				Select Time of Episode in PST
 			</button>
 		)
 	);
@@ -48,17 +38,8 @@ const CustomDatePicker = ({
 
 		const [hour, minutes, _] = calTime.split(":");
 		const utc = getUtcDate(calYear, monthValue, calDate, hour, minutes);
-		const payload: UpdatePayload = {
-			episodeId: episodeId,
-			type: "date",
-			date: utc,
-		};
-		console.log(utc);
-		const updated = await fetch(`/api/episode/${sanityId}`, {
-			method: "POST",
-			body: JSON.stringify(payload),
-		});
-		router.push("/");
+
+		setAddDateTime(utc);
 	};
 
 	return (

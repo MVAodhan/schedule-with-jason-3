@@ -13,7 +13,7 @@ const Final = () => {
 	return (
 		<div>
 			{" "}
-			<div className="flex my-5 items-center w-full">
+			<div className="flex my-5 items-center w-full bg-slate-50">
 				<label>caption disclainmer</label>
 				<VscCopy
 					className="cursor-pointer pl-1 h-8 w-8"
