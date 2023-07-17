@@ -76,30 +76,22 @@ const Publishing = ({ episode }: { episode: Episode }) => {
 	};
 
 	const youtubeDescription = `
-	${episode.description}
-	${episode.demo ? `Demo ${episode.demo}` : ""}
+${episode.description}
 
-	${episode.repo ? `Repo ${episode.repo}` : ""}
+${episode.demo ? `Demo ${episode.demo}` : ""}
 
-	Upcoming episodes:
-	https://lwj.dev/schedule
+${episode.repo ? `Repo ${episode.repo}` : ""}
 
-	Links & Resources:
+Upcoming episodes:
+https://lwj.dev/schedule
 
-	${formatLinks()}
+Links & Resources:
 
-	${getCredits()}
+${formatLinks()}
 
-	
+${getCredits()}
 
-${
-	episode.chapters
-		? `Chapters: 
-${episode.chapters}
-`
-		: ""
-}
-	`;
+${episode.chapters ?? `Chapters: ${episode.chapters}`}`;
 
 	return (
 		<div className="flex flex-col items-center w-3/5 m-5">

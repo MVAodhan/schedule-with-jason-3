@@ -141,14 +141,11 @@ export const getMonthValue = (monthChars: string) => {
 };
 
 export const getCredits = () => {
-	return `
-Watch future episodes live at https://twitch.tv/jlengstorf
+	return `Watch future episodes live at https://twitch.tv/jlengstorf
 
 This episode was sponsored by:
 - Netlify (https://lwj.dev/netlify)
-- Nx (https://lwj.dev/nx)
-- New Relic (https://lwj.dev/new-relic)
-- Pluralsight (https://lwj.dev/pluralsight)
+- Vets Who Code (https://lwj.dev/vetswhocode)
 
 Live transcription by White Coat Captioning (https://whitecoatcaptioning.com/)
 `;
