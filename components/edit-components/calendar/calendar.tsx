@@ -37,7 +37,7 @@ const Calendar = ({
 		}
 	};
 
-	console.log(episode.twitter_description);
+	console.log("cal twitterText", twitterText);
 
 	useEffect(() => {
 		setTwoWeeks(getScheduleTime(episode.date));

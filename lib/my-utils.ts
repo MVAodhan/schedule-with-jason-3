@@ -54,6 +54,7 @@ export const getScheduleTweet = (
 		slug = "https://www.twitch.tv/jlengstorf";
 	}
 	const tweet = `${title}
+
 ${twitter_description}
 
 ${footer}
