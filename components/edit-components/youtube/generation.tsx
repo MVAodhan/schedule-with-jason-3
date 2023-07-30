@@ -43,6 +43,7 @@ const Generation = ({ episode }: { episode: Episode }) => {
 							className="textarea textarea-bordered w-full bg-white"
 							placeholder="Chapters"
 							ref={chaptersRef}
+							defaultValue={episode?.chapters ? episode.chapters : ""}
 						></textarea>
 					</div>
 					<button
@@ -56,7 +57,7 @@ const Generation = ({ episode }: { episode: Episode }) => {
 					</button>
 				</div>
 
-				<div className="w-1/2 flex flex-col items-center h-full">
+				<div className="w-1/2 h-[400px] flex flex-col items-center ">
 					<LinkContainer episode={episode} />
 				</div>
 			</div>

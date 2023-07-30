@@ -75,7 +75,7 @@ const Page = ({ params }: { params: Params }) => {
 	};
 	return (
 		<main className="w-screen h-screen flex flex-col items-center bg-slate-50">
-			<section className="w-3/5 h-full  flex flex-col items-center  ">
+			<section className="w-full  h-full  flex flex-col items-center  ">
 				<div className="tabs tabs-boxed  justify-center bg-slate-50">
 					<div>
 						{tabs.map((tab, i) => (
@@ -91,7 +91,7 @@ const Page = ({ params }: { params: Params }) => {
 						))}
 					</div>
 				</div>
-				<div className="w-3/5 rounded-md flex flex-col items-center mt-10">
+				<div className="w-4/5 rounded-md flex flex-col items-center mt-10">
 					{episode && renderTab()}
 				</div>
 			</section>
