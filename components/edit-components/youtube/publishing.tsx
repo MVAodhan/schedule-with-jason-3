@@ -15,21 +15,12 @@ type Link = {
 };
 
 const Publishing = ({ episode }: { episode: Episode }) => {
-	console.log(episode.links);
-	console.log(episode.tags);
-	console.log(typeof episode.links);
-	console.log(typeof episode.tags);
-	const [JSONtags, setJSONTags] = useState<Tag[] | null>();
 	const [JSONLinks, setJSONLinks] = useState<Link[] | null>();
 	const copyText = (text: string) => {
 		navigator.clipboard.writeText(text);
 	};
 
 	useEffect(() => {
-		if (episode.tags) {
-			const tagsArray = episode.tags as Tag[];
-			setJSONTags(tagsArray);
-		}
 		if (episode.links) {
 			const linksArray = episode.links as Link[];
 			setJSONLinks(linksArray);
@@ -39,16 +30,22 @@ const Publishing = ({ episode }: { episode: Episode }) => {
 	}, []);
 
 	const getTags = () => {
-		const labels = JSONtags!.map((item: Tag) => item.label);
-
-		let tags = "";
-
-		for (let label of labels) {
-			tags = tags + `${label},`;
+		let json;
+		if (episode.tags) {
+			json = JSON.parse(episode?.tags as string);
 		}
-		const tagsWithoutComma = tags.replace(/,\s*$/, "");
+		const tagsArray = json.map((tag: Tag) => tag.label);
+		let tags: string = "";
+		if (tagsArray.length > 1) {
+			for (let tag of tagsArray) {
+				tags = tags + tag + ",";
+			}
+		} else {
+			tags = tagsArray[0];
+		}
 
-		return tagsWithoutComma;
+		console.log(tags);
+		return tags;
 	};
 
 	const formatLinks = () => {
@@ -117,17 +114,15 @@ ${episode.chapters ?? `Chapters: ${episode.chapters}`}`;
 				/>
 			</div>
 
-			{JSONtags && JSONtags.length > 0 && (
-				<div className="flex items-center mt-5">
-					<label>Youtube Tags</label>
-					<VscCopy
-						className="cursor-pointer pl-1 h-8 w-8"
-						onClick={() => {
-							copyText(getTags());
-						}}
-					/>
-				</div>
-			)}
+			<div className="flex items-center mt-5">
+				<label>Youtube Tags</label>
+				<VscCopy
+					className="cursor-pointer pl-1 h-8 w-8"
+					onClick={() => {
+						copyText(getTags());
+					}}
+				/>
+			</div>
 		</div>
 	);
 };

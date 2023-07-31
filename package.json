@@ -39,6 +39,7 @@
 		"zod": "^3.21.4"
 	},
 	"devDependencies": {
+		"@testing-library/react": "^14.0.0",
 		"@types/react-datepicker": "^4.11.2",
 		"@types/uuid": "^9.0.1",
 		"prisma": "^4.14.1"
