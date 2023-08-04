@@ -22,12 +22,14 @@ export function getDates(date: string) {
 		day: "numeric",
 		hour: "2-digit",
 		minute: "2-digit",
+		weekday: "short",
 	});
 	const nzDate = nzZonedDateTime.toLocaleString("en-NZ", {
 		month: "short",
 		day: "numeric",
 		hour: "2-digit",
 		minute: "2-digit",
+		weekday: "short",
 	});
 
 	return { usDate, nzDate, pstZonedDateTime };

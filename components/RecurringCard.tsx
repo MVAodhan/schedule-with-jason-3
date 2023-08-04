@@ -8,7 +8,6 @@ import { AiFillEdit } from "react-icons/ai";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-import { useRouter } from "next/navigation";
 import CustomDatePicker from "./CustomDatePicker";
 
 const Card = ({ episode }: { episode: Episode; title: String }) => {
@@ -17,7 +16,7 @@ const Card = ({ episode }: { episode: Episode; title: String }) => {
 
 	const [guest, setGuest] = useState<Guest | null>();
 
-	const router = useRouter();
+	console.log("recurring card", episode);
 
 	useEffect(() => {
 		let { usDate, nzDate } = getDates(episode.date);

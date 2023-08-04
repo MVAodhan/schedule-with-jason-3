@@ -32,8 +32,8 @@ export default function Home() {
 	};
 
 	return (
-		<main className="flex min-h-screen flex-col items-center px-24 bg-slate-50">
-			<div className="w-full flex flex-col items-center">
+		<main className="flex min-h-screen flex-col items-center px-5 md:px-24 bg-slate-50">
+			<div className="w-full flex flex-col items-center ">
 				<div className="w-full flex justify-end ">
 					<button
 						className="rounded-md text-black bg-gray-100 shadow-xl p-3 cursor-pointer"

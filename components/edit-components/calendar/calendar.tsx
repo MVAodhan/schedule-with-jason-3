@@ -37,7 +37,7 @@ const Calendar = ({
 		}
 	};
 
-	console.log("cal twitterText", twitterText);
+	console.log("cal twitterText", twitterDescDafault);
 
 	useEffect(() => {
 		setTwoWeeks(getScheduleTime(episode.date));
@@ -125,7 +125,7 @@ const Calendar = ({
 					className="textarea textarea-bordered w-full bg-white"
 					ref={twitterDescRef}
 					onChange={() =>
-						setTwitterText(twitterDescRef.current?.value as string)
+						setTwitterDescDefault(twitterDescRef.current?.value as string)
 					}
 					defaultValue={twitterDescDafault}
 				></textarea>
@@ -142,7 +142,7 @@ const Calendar = ({
 									onClick={() => {
 										let tweet = getScheduleTweet(
 											"twoWeeks",
-											twitterText,
+											twitterDescDafault,
 											episode.uri
 										);
 										navigator.clipboard.writeText(tweet);
@@ -158,7 +158,7 @@ const Calendar = ({
 									onClick={() => {
 										let tweet = getScheduleTweet(
 											"ninetyMinutes",
-											twitterText,
+											twitterDescDafault,
 											episode.uri
 										);
 										navigator.clipboard.writeText(tweet);
@@ -174,7 +174,7 @@ const Calendar = ({
 								<VscCopy
 									className="cursor-pointer pl-1 h-8 w-8"
 									onClick={() => {
-										let tweet = getScheduleTweet("Live", twitterText);
+										let tweet = getScheduleTweet("Live", twitterDescDafault);
 										navigator.clipboard.writeText(tweet);
 									}}
 								/>
