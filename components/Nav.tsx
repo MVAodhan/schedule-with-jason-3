@@ -22,7 +22,7 @@ const Nav = () => {
 	return (
 		<div className="navbar bg-slate-50">
 			<div className="flex-1">
-				<a className="btn btn-ghost normal-case text-xl" href={"/"}>
+				<a className="btn btn-ghost normal-case" href={"/"}>
 					SWJ 3.0
 				</a>
 				{session && (

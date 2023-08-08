@@ -26,21 +26,21 @@ const Initial = ({
 		}
 	};
 	return (
-		<div className="w-full">
-			<div className="flex items-center w-full justify-around m-2">
+		<div className="w-full flex flex-col items-center">
+			<div className="flex items-center w-4/5 justify-between m-2 ">
 				<div>US Date</div>
 				<div>{usDate ? usDate : "no date"}</div>
 			</div>
-			<div className="flex items-center w-full justify-around m-2">
+			<div className="flex items-center w-4/5 justify-between m-2 ">
 				<div>NZ Date</div>
 				<div>{nzDate ? nzDate : "no date"}</div>
 			</div>
-			<div className="flex items-center w-full justify-around">
+			<div className="flex items-center w-4/5 justify-between m-2 ">
 				<input
 					type="text"
 					defaultValue={episode.title}
 					ref={titleRef}
-					className="input input-bordered bg-slate-50"
+					className="input input-bordered bg-slate-50 w-full"
 				/>
 				<VscCopy
 					className="cursor-pointer pl-1 h-8 w-8"
@@ -49,12 +49,12 @@ const Initial = ({
 					}}
 				/>
 			</div>
-			<div className="flex items-center justify-center w-full mt-1">
+			<div className="flex items-center w-4/5 justify-between m-2 ">
 				<input
 					type="text"
 					defaultValue={guest.name}
 					ref={nameRef}
-					className="input input-bordered bg-slate-50"
+					className="input input-bordered bg-slate-50 w-full"
 				/>
 				<VscCopy
 					className="cursor-pointer pl-1 h-8 w-8"
@@ -63,7 +63,7 @@ const Initial = ({
 					}}
 				/>
 			</div>
-			<div className="flex items-center justify-center w-full mt-1">
+			<div className="flex items-center w-4/5 justify-between m-2 ">
 				<textarea
 					className="textarea textarea-bordered w-full bg-slate-50"
 					defaultValue={episode.description}

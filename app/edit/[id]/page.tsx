@@ -74,9 +74,9 @@ const Page = ({ params }: { params: Params }) => {
 		}
 	};
 	return (
-		<main className="w-screen h-screen flex flex-col items-center bg-slate-50">
-			<section className="w-full  h-full  flex flex-col items-center  ">
-				<div className="tabs tabs-boxed  justify-center bg-slate-50">
+		<main className="w-screen h-screen flex flex-col items-center bg-slate-50 text-sm">
+			<section className="w-full h-full flex flex-col items-center  ">
+				<div className="tabs tabs-boxed justify-center bg-slate-50">
 					<div className="flex justify-center">
 						{tabs.map((tab, i) => (
 							<a
