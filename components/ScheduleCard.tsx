@@ -30,7 +30,7 @@ const ScheduleCard = ({ episode, title }: { episode: any; title: String }) => {
 	}, []);
 
 	const deleteFn = async () => {
-		const res = await fetch(`/api/delete/`, {
+		const res = await fetch(`/api/delete-scheduled`, {
 			method: "POST", // Specify the HTTP method
 			headers: {
 				"Content-Type": "application/json", // Add this line
@@ -45,7 +45,7 @@ const ScheduleCard = ({ episode, title }: { episode: any; title: String }) => {
 	};
 
 	return (
-		<div className="card w-full shadow-xl mx-auto  mb-10">
+		<div className="card w-11/12 shadow-xl mx-auto mb-10">
 			<div className="card-body ">
 				<div className="flex justify-around">
 					<button

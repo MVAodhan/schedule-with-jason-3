@@ -16,14 +16,10 @@ const Card = ({ episode }: { episode: Episode; title: String }) => {
 
 	const [guest, setGuest] = useState<Guest | null>();
 
-	console.log("recurring card", episode);
-
 	useEffect(() => {
 		let { usDate, nzDate } = getDates(episode.date);
 		setUsDate(usDate);
 		setNzDate(nzDate);
-		console.log(usDate);
-		console.log(nzDate);
 
 		setGuest(episode.guest as unknown as Guest);
 

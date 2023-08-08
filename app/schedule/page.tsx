@@ -18,7 +18,7 @@ const Page = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
-		<main className="flex min-h-screen flex-col items-center  p-24">
+		<main className="flex w-full min-h-screen flex-col items-center ">
 			<h2 className="text-2xl mb-10">Episodes For Scheduling</h2>
 			{episodes?.map((ep: Episode) => {
 				if (ep.title !== "Building Web Demos + Q&A") {
