@@ -4,6 +4,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 import Nav from "@/components/Nav";
+import ResponsiveNav from "@/components/ResponsiveNav";
 
 const inter = Inter({ subsets: ["latin"] });
 

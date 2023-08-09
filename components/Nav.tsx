@@ -13,7 +13,7 @@ const Tabs = [
 	{
 		id: 2,
 		path: "/schedule",
-		label: "Scheduling",
+		label: "Scheduled",
 	},
 ];
 
@@ -39,8 +39,35 @@ const Nav = () => {
 					</div>
 				)}
 			</div>
-			<div className="flex-none">
+			<div className="hidden md:flex">
 				<ul className="menu menu-horizontal px-1">
+					{Tabs.map((tab) => (
+						<li key={tab.id}>
+							<Link href={tab.path}>{tab.label}</Link>
+						</li>
+					))}
+					{session ? (
+						<li>
+							<button onClick={() => signOut()}>Signout</button>
+						</li>
+					) : (
+						<li>
+							<button onClick={() => signIn()}>Sign In</button>
+						</li>
+					)}
+				</ul>
+			</div>
+			<div className="dropdown dropdown-end md:hidden">
+				<label
+					tabIndex={0}
+					className="btn m-1 border-none bg-slate-100 hover:bg-slate-100"
+				>
+					x
+				</label>
+				<ul
+					tabIndex={0}
+					className="dropdown-content z-[1] menu p-2 shadow bg-slate-100 rounded-box w-52"
+				>
 					{Tabs.map((tab) => (
 						<li key={tab.id}>
 							<Link href={tab.path}>{tab.label}</Link>
