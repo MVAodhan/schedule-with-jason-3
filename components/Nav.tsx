@@ -60,9 +60,19 @@ const Nav = () => {
 			<div className="dropdown dropdown-end md:hidden">
 				<label
 					tabIndex={0}
-					className="btn m-1 border-none bg-slate-100 hover:bg-slate-100"
+					className="btn m-1 border-none bg-transparent hover:bg-transparent"
 				>
-					x
+					<svg
+						width="25"
+						height="25"
+						viewBox="0 0 44 25"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<rect width="44" height="5" rx="2" fill="#0A0A0A" />
+						<rect y="20" width="44" height="5" rx="2" fill="#0A0A0A" />
+						<rect y="10" width="44" height="5" rx="2" fill="#0A0A0A" />
+					</svg>
 				</label>
 				<ul
 					tabIndex={0}
