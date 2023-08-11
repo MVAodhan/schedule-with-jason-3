@@ -35,6 +35,26 @@ export function getDates(date: string) {
 	return { usDate, nzDate, pstZonedDateTime };
 }
 
+export const getEndDate = (date: any) => {
+	const utcInstant = Temporal.Instant.from(date);
+	const pstZonedDateTime = utcInstant.toZonedDateTime({
+		timeZone: "Pacific/Auckland",
+		calendar: "gregory",
+	});
+	const duration = Temporal.Duration.from({ hours: 1, minutes: 30 });
+	// Add the duration to the time
+	let newTime = pstZonedDateTime.add(duration);
+	let newTimeString = newTime.toLocaleString("en-NZ", {
+		month: "short",
+		day: "numeric",
+		hour: "2-digit",
+		minute: "2-digit",
+		weekday: "short",
+	});
+
+	return newTimeString;
+};
+
 type TTweetType = "twoWeeks" | "ninetyMinutes" | "Live";
 export const getScheduleTweet = (
 	tweetType: TTweetType,

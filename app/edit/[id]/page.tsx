@@ -2,6 +2,7 @@
 
 import Calendar from "@/components/edit-components/calendar/calendar";
 import Sanity from "@/components/edit-components/container";
+import Discord from "@/components/edit-components/discord/Discord";
 import Twitter from "@/components/edit-components/twitter/twitter";
 import Youtube from "@/components/edit-components/youtube/youtube";
 import { getDates } from "@/lib/my-utils";
@@ -16,6 +17,7 @@ interface Params {
 const tabs = [
 	{ header: "Sanity Details", id: "sanity" },
 	{ header: "Calendar Details", id: "calendar" },
+	{ header: "Discord Details", id: "discord" },
 	{ header: "Youtube Details", id: "youtube" },
 	{ header: "Twitter Details", id: "twitter" },
 ];
@@ -62,6 +64,8 @@ const Page = ({ params }: { params: Params }) => {
 				return <Youtube episode={episode!} />;
 			case "twitter":
 				return <Twitter episode={episode!} guest={guest} />;
+			case "discord":
+				return <Discord episode={episode!} nzDate={nzDate} guest={guest} />;
 			default:
 				return (
 					<Sanity
