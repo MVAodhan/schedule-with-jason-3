@@ -36,7 +36,7 @@ export default function Home() {
 			<div className="w-full flex flex-col items-center ">
 				<div className="w-full flex justify-end ">
 					<button
-						className="rounded-md text-black bg-gray-100 shadow-xl p-3 cursor-pointer"
+						className="rounded-md text-black bg-grey-100 shadow-xl p-3 cursor-pointer"
 						onClick={handleSync}
 						disabled={disabled}
 					>

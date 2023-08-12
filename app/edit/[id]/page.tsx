@@ -81,11 +81,11 @@ const Page = ({ params }: { params: Params }) => {
 		<main className="w-screen h-screen flex flex-col items-center bg-slate-50 text-sm">
 			<section className="w-full h-full flex flex-col items-center  ">
 				<div className="tabs tabs-boxed justify-center bg-slate-50">
-					<div className="flex justify-center">
+					<div className="flex justify-center w-3/5 md:w-full">
 						{tabs.map((tab, i) => (
 							<a
 								key={i}
-								className={`tab bg-slate-50 ${
+								className={`tab bg-slate-50 text-xs lg:text-lg ${
 									tab.id === activeTab ? "tab-active" : ""
 								}`}
 								onClick={() => setActiveTab(tab.id)}
