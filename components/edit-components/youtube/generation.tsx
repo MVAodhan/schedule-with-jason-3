@@ -48,7 +48,7 @@ const Generation = ({ episode }: { episode: Episode }) => {
 					</div>
 					<button
 						className={`btn btn-outline mt-5 bg-slate-800 text-white ${
-							disabled ? "disable bg-grey-100" : ""
+							disabled ? "disabled bg-grey-100" : ""
 						}`}
 						onClick={updateChapters}
 						disabled={disabled}
