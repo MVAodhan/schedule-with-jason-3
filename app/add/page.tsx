@@ -29,6 +29,7 @@ const Page = () => {
 
     if (!addDateTime) {
       setAddError("Please Enter a Date to add Event");
+      return;
     }
 
     const payload = {
@@ -45,6 +46,7 @@ const Page = () => {
       body: JSON.stringify(payload),
     });
 
+    setAddError("");
     router.push("/");
   };
   return (
@@ -110,6 +112,7 @@ const Page = () => {
             >
               Schedule
             </button>
+            {addError && <p className="text-red-500">{addError}</p>}
           </div>
         </div>
       </section>
