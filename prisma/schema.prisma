@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Episode {
-  id                  Int     @id @default(autoincrement())
+  id                  Int      @id @default(autoincrement())
   sanityId            String
   date                String
   description         String
@@ -25,6 +25,9 @@ model Episode {
   demo                String?
   repo                String?
   twitter_description String?
+  schedule_tweet      Boolean?
+  ninety_minute_tweet Boolean?
+  live_tweet          Boolean?
 }
 
 model Schedule {
@@ -38,18 +41,18 @@ model Schedule {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

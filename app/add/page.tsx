@@ -18,8 +18,8 @@ const Page = () => {
   const twitterDescRef = useRef<HTMLTextAreaElement | null>(null);
   const techRef = useRef<HTMLInputElement | null>(null);
   const [addDateTime, setAddDateTime] = useState<string>("");
-
   const [addError, setAddError] = useState("");
+
   const disabled = useDisabled();
 
   const router = useRouter();
@@ -27,10 +27,6 @@ const Page = () => {
   const addScheduled = async () => {
     // deconstructing date and time ref to construct date for db
 
-    if (!addDateTime) {
-      setAddError("Please enter a date to submit an episode for scheduling");
-      return;
-    }
     const payload = {
       guest: guestRef.current?.value,
       description: textDescRef.current?.value,
@@ -99,7 +95,6 @@ const Page = () => {
               type="text"
               className="input input-bordered w-full max-w-xs bg-slate-50"
             />
-            {addError && <p className="text-red-500"> {addError}</p>}
             <button
               className={`btn mt-5 ${
                 disabled === true
