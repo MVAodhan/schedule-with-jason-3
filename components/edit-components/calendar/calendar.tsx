@@ -24,11 +24,12 @@ const Calendar = ({
   const titleRef = useRef<HTMLInputElement | null>(null);
   const descRef = useRef<HTMLTextAreaElement | null>(null);
   const twitterDescRef = useRef<HTMLTextAreaElement | null>(null);
-  const [twitterText, setTwitterText] = useState<string>("");
+  const ytLiveLink = useRef<HTMLInputElement | null>(null);
 
   const [twoWeeks, setTwoWeeks] = useState<string>("");
   const [ninetyMinutes, setNinetyMinutes] = useState<string>("");
-  const [twitterDescDafault, setTwitterDescDefault] = useState<string>("");
+  const [twitterDescDefault, setTwitterDescDefault] = useState<string>("");
+  const [ytLiveLinkDefault, setYtLiveLinkDefault] = useState<string>("");
 
   const [isScheduledChecked, setIsScheduledChecked] = useState(
     episode.schedule_tweet ? episode.schedule_tweet : false
@@ -54,9 +55,10 @@ const Calendar = ({
       schedule_tweet: isScheduledChecked,
       ninety_minute_tweet: isNinetyMinuteChecked,
       live_tweet: isLiveChecked,
+      yt_live_tweet: ytLiveLink.current?.value,
     };
 
-    const scheduled = await fetch("/api/save-changes", {
+    await fetch("/api/save-changes", {
       method: "POST",
       body: JSON.stringify(payload),
     });
@@ -68,6 +70,11 @@ const Calendar = ({
     if (episode.twitter_description) {
       setTwitterDescDefault(episode.twitter_description);
     }
+
+    if (episode.yt_live_link) {
+      setYtLiveLinkDefault(episode.yt_live_link);
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -141,115 +148,139 @@ const Calendar = ({
         </button>
       </div>
 
+      <p className="py-4 text-lg">
+        Enter a Twitter Description & Youtube Live Link to generate tweets
+      </p>
       <div className="flex flex-col my-5 items-center w-full">
-        <label>Enter a twitter description to get sceduling tweets</label>
+        <label>Twitter description</label>
         <textarea
           className="textarea textarea-bordered w-full bg-white"
           ref={twitterDescRef}
           onChange={() =>
             setTwitterDescDefault(twitterDescRef.current?.value as string)
           }
-          defaultValue={twitterDescDafault}
+          defaultValue={twitterDescDefault}
         ></textarea>
       </div>
+      <div className="flex flex-col my-5 items-center w-full">
+        <label>Youtube Live Link</label>
+        <input
+          className="textarea textarea-bordered w-full bg-white"
+          ref={ytLiveLink}
+          onChange={() =>
+            setYtLiveLinkDefault(ytLiveLink.current?.value as string)
+          }
+          defaultValue={ytLiveLinkDefault}
+        ></input>
+        <button
+          onClick={() => {
+            console.log(ytLiveLink.current?.value);
+          }}
+        >
+          Log
+        </button>
+      </div>
 
-      {(twitterText.length > 1 || twitterDescDafault.length > 1) && (
-        <>
-          <div className="w-full mt-10 mb-10 flex justify-between">
-            <div className="flex flex-col items-center">
-              {twoWeeks}
-              <div className="flex">
-                <label className="label">Two Weeks</label>
-                <VscCopy
-                  className="cursor-pointer pl-1 h-8 w-8"
-                  onClick={() => {
-                    let tweet = getScheduleTweet(
-                      "twoWeeks",
-                      twitterDescDafault,
-                      episode.uri
-                    );
-                    navigator.clipboard.writeText(tweet);
-                  }}
-                />
-              </div>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="flex ">
-                <label className="label">90 Mins</label>
-                <VscCopy
-                  className="cursor-pointer pl-1 h-8 w-8"
-                  onClick={() => {
-                    let tweet = getScheduleTweet(
-                      "ninetyMinutes",
-                      twitterDescDafault,
-                      episode.uri
-                    );
-                    navigator.clipboard.writeText(tweet);
-                  }}
-                />
-              </div>
-              {ninetyMinutes}
-            </div>
-            <div className="flex flex-col items-center ">
-              {usDate}
-              <div className="flex ">
-                <label className="label">Live</label>
-                <VscCopy
-                  className="cursor-pointer pl-1 h-8 w-8"
-                  onClick={() => {
-                    let tweet = getScheduleTweet("Live", twitterDescDafault);
-                    navigator.clipboard.writeText(tweet);
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="w-full mt-10 mb-10 flex justify-between">
-            <div className="flex flex-col items-center">
-              <div>
-                <label className="cursor-pointer label">
-                  <input
-                    type="checkbox"
-                    checked={isScheduledChecked}
-                    className="checkbox checkbox-accent"
-                    onChange={() => {
-                      setIsScheduledChecked((prev) => !prev);
+      {(twitterDescRef.current?.value.length! > 1 ||
+        twitterDescDefault.length > 1) &&
+        (ytLiveLink.current?.value.length! > 1 ||
+          ytLiveLinkDefault.length > 1) && (
+          <>
+            <div className="w-full mt-10 mb-10 flex justify-between">
+              <div className="flex flex-col items-center">
+                {twoWeeks}
+                <div className="flex">
+                  <label className="label">Two Weeks</label>
+                  <VscCopy
+                    className="cursor-pointer pl-1 h-8 w-8"
+                    onClick={() => {
+                      let tweet = getScheduleTweet(
+                        "twoWeeks",
+                        twitterDescDefault,
+                        ytLiveLinkDefault
+                      );
+                      navigator.clipboard.writeText(tweet);
                     }}
                   />
-                </label>
+                </div>
               </div>
-            </div>
-            <div className="flex flex-col items-center">
-              <div>
-                <label className="cursor-pointer label">
-                  <input
-                    type="checkbox"
-                    checked={isNinetyMinuteChecked}
-                    className="checkbox checkbox-accent"
-                    onChange={() => {
-                      setIsNinetyMinuteChecked((prev) => !prev);
+              <div className="flex flex-col items-center">
+                <div className="flex ">
+                  <label className="label">90 Mins</label>
+                  <VscCopy
+                    className="cursor-pointer pl-1 h-8 w-8"
+                    onClick={() => {
+                      let tweet = getScheduleTweet(
+                        "ninetyMinutes",
+                        twitterDescDefault,
+                        ytLiveLinkDefault
+                      );
+                      navigator.clipboard.writeText(tweet);
                     }}
                   />
-                </label>
+                </div>
+                {ninetyMinutes}
               </div>
-            </div>
-            <div className="flex flex-col items-center ">
-              <div>
-                <label className="cursor-pointer label">
-                  <input
-                    type="checkbox"
-                    checked={isLiveChecked}
-                    className="checkbox checkbox-accent"
-                    onChange={() => {
-                      setIsLiveChecked((prev) => !prev);
+              <div className="flex flex-col items-center ">
+                {usDate}
+                <div className="flex ">
+                  <label className="label">Live</label>
+                  <VscCopy
+                    className="cursor-pointer pl-1 h-8 w-8"
+                    onClick={() => {
+                      let tweet = getScheduleTweet("Live", twitterDescDefault);
+                      navigator.clipboard.writeText(tweet);
                     }}
                   />
-                </label>
+                </div>
               </div>
             </div>
-          </div>
-        </>
-      )}
+            <div className="w-full mt-10 mb-10 flex justify-between">
+              <div className="flex flex-col items-center">
+                <div>
+                  <label className="cursor-pointer label">
+                    <input
+                      type="checkbox"
+                      checked={isScheduledChecked}
+                      className="checkbox checkbox-accent"
+                      onChange={() => {
+                        setIsScheduledChecked((prev) => !prev);
+                      }}
+                    />
+                  </label>
+                </div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div>
+                  <label className="cursor-pointer label">
+                    <input
+                      type="checkbox"
+                      checked={isNinetyMinuteChecked}
+                      className="checkbox checkbox-accent"
+                      onChange={() => {
+                        setIsNinetyMinuteChecked((prev) => !prev);
+                      }}
+                    />
+                  </label>
+                </div>
+              </div>
+              <div className="flex flex-col items-center ">
+                <div>
+                  <label className="cursor-pointer label">
+                    <input
+                      type="checkbox"
+                      checked={isLiveChecked}
+                      className="checkbox checkbox-accent"
+                      onChange={() => {
+                        setIsLiveChecked((prev) => !prev);
+                      }}
+                    />
+                  </label>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       <button className="btn" onClick={saveChanges}>
         {" "}
         Save Changes

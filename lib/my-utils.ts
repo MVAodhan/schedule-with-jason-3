@@ -7,6 +7,8 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
+const liveLink = 'https://lwj.dev/live'
+
 export function getDates(date: string) {
 	const utcInstant = Temporal.Instant.from(date);
 	const pstZonedDateTime = utcInstant.toZonedDateTime({
@@ -65,15 +67,15 @@ export const getScheduleTweet = (
 	let footer;
 
 	if (tweetType === "twoWeeks") {
-		title = "📣 Just Scheduled! 📣";
-		footer = "⬇️ Details Here ⬇️";
+		title = "📣 Just Scheduled";
+		footer = "Details: ";
 	} else if (tweetType === "ninetyMinutes") {
-		title = "⚠️ In 90 Mins! ⚠️";
-		footer = "⬇️ Details Here ⬇️";
+		title = "⚠️ In 90 Miniutes";
+		footer = "Details: ";
 	} else {
-		title = "🔴 Live! 🔴";
-		footer = "⬇️ Watch Live Here 👀";
-		slug = "https://www.twitch.tv/jlengstorf";
+		title = "🔴 Live";
+		footer = "Watch Live: ";
+		slug = `${liveLink}`;
 	}
 	const tweet = `${title}
 
@@ -164,7 +166,7 @@ export const getMonthValue = (monthChars: string) => {
 };
 
 export const getCredits = () => {
-	return `Watch future episodes live at https://twitch.tv/jlengstorf
+	return `Watch future episodes live at ${liveLink}
 
 This episode was sponsored by:
 - Netlify (https://lwj.dev/netlify)

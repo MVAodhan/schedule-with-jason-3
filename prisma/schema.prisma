@@ -25,6 +25,7 @@ model Episode {
   demo                String?
   repo                String?
   twitter_description String?
+  yt_live_link        String?
   schedule_tweet      Boolean?
   ninety_minute_tweet Boolean?
   live_tweet          Boolean?
