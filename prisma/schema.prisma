@@ -29,6 +29,7 @@ model Episode {
   schedule_tweet      Boolean?
   ninety_minute_tweet Boolean?
   live_tweet          Boolean?
+  discord_event       Boolean?
 }
 
 model Schedule {

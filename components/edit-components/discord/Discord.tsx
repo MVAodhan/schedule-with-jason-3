@@ -1,7 +1,7 @@
 "use client";
 
 import { VscCopy } from "react-icons/vsc";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Episode } from "@prisma/client";
 import { getEndDate } from "@/lib/my-utils";
 
@@ -18,6 +18,9 @@ const Discord = ({
   const descRef = useRef<HTMLTextAreaElement | null>(null);
   const endDate = getEndDate(episode.date);
   const poster = `https://www.learnwithjason.dev/${episode.slug}/poster.jpg`;
+  const [discordChecked, setDiscordChecked] = useState(
+    episode.discord_event ? episode.discord_event : false
+  );
 
   const copyValue = (ref: any) => {
     if (ref.current?.value !== null) {
@@ -26,14 +29,17 @@ const Discord = ({
     }
   };
 
-  function downloadPoster() {
-    const a = document.createElement("a");
-    a.href = poster;
-    a.download = "poster.jpg";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
+  const saveChanges = async () => {
+    const payload = {
+      id: episode.id,
+      discord_event: discordChecked,
+    };
+
+    await fetch("/api/save-discord", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+  };
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -92,6 +98,22 @@ const Discord = ({
           Poster
         </a>
       </div>
+      <div>
+        <label className="cursor-pointer label">
+          <input
+            type="checkbox"
+            checked={discordChecked}
+            className="checkbox checkbox-accent"
+            onChange={() => {
+              setDiscordChecked((prev) => !prev);
+            }}
+          />
+        </label>
+      </div>
+      <button className="btn" onClick={saveChanges}>
+        {" "}
+        Save Changes
+      </button>
     </div>
   );
 };
