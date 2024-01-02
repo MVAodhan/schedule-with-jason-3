@@ -12,7 +12,8 @@ export async function POST(request: Request) {
             twitter_description: body.twitter_description,
             schedule_tweet : body.schedule_tweet,
             ninety_minute_tweet : body.ninety_minute_tweet,
-            live_tweet : body.live_tweet
+            live_tweet : body.live_tweet,
+            yt_live_link: body.yt_live_link
 
         }
     })
