@@ -58,11 +58,10 @@ const Calendar = ({
       yt_live_link: ytLiveLink.current?.value,
     };
 
-    console.log(payload);
-    // await fetch("/api/save-changes", {
-    //   method: "POST",
-    //   body: JSON.stringify(payload),
-    // });
+    await fetch("/api/save-changes", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
   };
 
   useEffect(() => {
