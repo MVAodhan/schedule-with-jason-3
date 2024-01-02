@@ -55,7 +55,7 @@ const Calendar = ({
       schedule_tweet: isScheduledChecked,
       ninety_minute_tweet: isNinetyMinuteChecked,
       live_tweet: isLiveChecked,
-      yt_live_tweet: ytLiveLink.current?.value,
+      yt_live_link: ytLiveLink.current?.value,
     };
 
     await fetch("/api/save-changes", {

@@ -93,13 +93,10 @@ const Discord = ({
           }}
         />
       </div>
-      <div className="mt-5 flex justify-center">
-        <a href={poster} target="_blank">
-          Poster
-        </a>
-      </div>
+
       <div>
-        <label className="cursor-pointer label">
+        <label className="cursor-pointer label flex flex-col gap-2 pt-2 text-lg">
+          Discord Event Scheduled
           <input
             type="checkbox"
             checked={discordChecked}
@@ -110,7 +107,12 @@ const Discord = ({
           />
         </label>
       </div>
-      <button className="btn" onClick={saveChanges}>
+      <div className="mt-5 flex justify-center">
+        <a href={poster} target="_blank">
+          Poster
+        </a>
+      </div>
+      <button className="btn pt-2" onClick={saveChanges}>
         {" "}
         Save Changes
       </button>
