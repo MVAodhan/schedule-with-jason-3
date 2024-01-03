@@ -3,7 +3,7 @@
 import { VscCopy } from "react-icons/vsc";
 import { useRef, useState } from "react";
 import { Episode } from "@prisma/client";
-import { getEndDate } from "@/lib/my-utils";
+import { getEndDate, liveLink } from "@/lib/my-utils";
 
 const Discord = ({
   episode,
@@ -48,11 +48,7 @@ const Discord = ({
         <VscCopy
           className="cursor-pointer pl-1 h-8 w-8"
           onClick={() => {
-            navigator.clipboard.writeText(
-              episode.yt_live_link
-                ? episode.yt_live_link
-                : "No Youtube link set"
-            );
+            navigator.clipboard.writeText(liveLink);
           }}
         />
       </div>

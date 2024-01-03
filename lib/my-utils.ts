@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
-const liveLink = 'https://lwj.dev/live'
+export const liveLink = 'https://lwj.dev/live'
 
 export function getDates(date: string) {
 	const utcInstant = Temporal.Instant.from(date);
