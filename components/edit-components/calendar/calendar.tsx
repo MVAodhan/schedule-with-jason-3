@@ -216,6 +216,7 @@ const Calendar = ({
                         ytLiveLinkDefault
                       );
                       navigator.clipboard.writeText(tweet);
+                      console.log("coping ninety minute tweet");
                     }}
                   />
                 </div>

@@ -70,7 +70,7 @@ export const getScheduleTweet = (
 		title = "📣 Just Scheduled";
 		footer = "Details: ";
 	} else if (tweetType === "ninetyMinutes") {
-		title = "⚠️ In 90 Miniutes";
+		title = "⚠️ In 90 Minutes";
 		footer = "Details: ";
 	} else {
 		title = "🔴 Live";

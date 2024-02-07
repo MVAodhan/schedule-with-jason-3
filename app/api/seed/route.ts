@@ -11,9 +11,10 @@ export async function GET() {
 	const episodes = await res.json();
 	// Gets all the episodes in the DB
 	let episodesInDB = await prisma.episode.findMany();
+	
 	// Creates an array of all the sanityIds in the DB
 	let sanittyIDsInDB = episodesInDB.map((episode: any) => episode.sanityId);
-
+	
 	const createEpisode = async (episode: any) => {
 		await prisma.episode.create({
 			data: {
@@ -46,6 +47,7 @@ export async function GET() {
 		}
 	});
 
+	console.log(episodesToAdd)
 	// // // For each of the episodes from the Sanity api, it checks if the sanityId is in the DB, if not, it adds it to the the DB
 	await episodesToAdd.forEach((episode: any) => {
 		if (!sanittyIDsInDB.includes(episode.id)) {
