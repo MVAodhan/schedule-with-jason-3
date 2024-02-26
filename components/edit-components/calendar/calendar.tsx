@@ -1,6 +1,6 @@
 "use client";
 import { Episode } from "@prisma/client";
-import { getScheduleTime, getScheduleTweet } from "@/lib/my-utils";
+import { getScheduleTime, getScheduleTweet, liveLink } from "@/lib/my-utils";
 import { useEffect, useRef, useState } from "react";
 
 import { VscCopy } from "react-icons/vsc";
@@ -126,7 +126,7 @@ const Calendar = ({
           <VscCopy
             className="cursor-pointer pl-1 h-8 w-8"
             onClick={() => {
-              navigator.clipboard.writeText("https://twitch.tv/jlengstorf");
+              navigator.clipboard.writeText(liveLink);
             }}
           />
         </div>

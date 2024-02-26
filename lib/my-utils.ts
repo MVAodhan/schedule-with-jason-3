@@ -169,6 +169,7 @@ export const getCredits = () => {
 	return `Watch future episodes live at ${liveLink}
 
 This episode was sponsored by:
+- Nx (https://lwj.dev/nx)
 - Netlify (https://lwj.dev/netlify)
 - Vets Who Code (https://lwj.dev/vetswhocode)
 
