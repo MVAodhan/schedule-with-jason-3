@@ -12,8 +12,9 @@ model Episode {
   sanityId            String
   date                String
   description         String
+  twitter_desc        String?
   guest               Json
-  host                Json
+  host                Json?
   tags                Json
   slug                String
   title               String
