@@ -17,6 +17,7 @@ const Page = () => {
   const guestHandleRef = useRef<HTMLInputElement | null>(null);
   const textDescRef = useRef<HTMLTextAreaElement | null>(null);
   const twitterDescRef = useRef<HTMLTextAreaElement | null>(null);
+  const techRef = useRef<HTMLInputElement | null>(null);
   const [addDateTime, setAddDateTime] = useState<string>("");
   const [addError, setAddError] = useState("");
 
@@ -24,17 +25,39 @@ const Page = () => {
 
   const router = useRouter();
 
+  function slugify(str: string) {
+    str = str.replace(/^\s+|\s+$/g, ""); // trim leading/trailing white space
+    str = str.toLowerCase(); // convert string to lowercase
+    str = str
+      .replace(/[^a-z0-9 -]/g, "-") // remove any non-alphanumeric characters
+      .replace(/\s+/g, "-") // replace spaces with hyphens
+      .replace(/-+/g, "-"); // remove consecutive hyphens
+    return str;
+  }
+
   const addScheduled = async () => {
+    const slug = slugify(titleRef.current?.value as string);
+
+    const uri = `https://www.learnwithjason.dev/${slug}`;
     // deconstructing date and time ref to construct date for db
+    const id = uuidv4();
     const payload = {
-      guest: guestRef.current?.value,
+      guest: {
+        name: guestRef.current?.value,
+        image: "",
+        twitter: guestHandleRef.current?.value,
+      },
+      host: {},
+      sanityId: id,
       date: addDateTime,
       description: textDescRef.current?.value,
       twitter_description: twitterDescRef.current?.value,
-      guest_twitter: guestHandleRef.current?.value,
       title: titleRef.current?.value,
+      tags: [],
+      slug: slug,
+      uri: uri,
     };
-    const scheduled = await fetch("/api/schedule", {
+    const scheduled = await fetch("/api/new", {
       method: "POST",
       body: JSON.stringify(payload),
     });
@@ -90,7 +113,6 @@ const Page = () => {
               ref={textDescRef}
               className="textarea textarea-bordered w-3/5 bg-slate-50"
             ></textarea>
-
             <button
               className={`btn mt-5 ${
                 disabled === true
