@@ -15,7 +15,7 @@ model Episode {
   twitter_desc        String?
   guest               Json
   host                Json?
-  tags                Json
+  tags                Json?
   slug                String
   title               String
   uri                 String
@@ -31,6 +31,8 @@ model Episode {
   ninety_minute_tweet Boolean?
   live_tweet          Boolean?
   discord_event       Boolean?
+  calendar_event      Boolean?
+  website             Boolean?
 }
 
 model Schedule {

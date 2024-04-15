@@ -39,7 +39,7 @@ const Page = () => {
     const slug = slugify(titleRef.current?.value as string);
 
     const uri = `https://www.learnwithjason.dev/${slug}`;
-    // deconstructing date and time ref to construct date for db
+
     const id = uuidv4();
     const payload = {
       guest: {
@@ -62,6 +62,10 @@ const Page = () => {
       body: JSON.stringify(payload),
     });
     router.push("/");
+  };
+
+  const debugFunc = () => {
+    console.log();
   };
 
   return (
@@ -120,7 +124,13 @@ const Page = () => {
                   : ""
               }`}
               disabled={disabled}
-              onClick={addScheduled}
+              onClick={() => {
+                if (addDateTime === "") {
+                  alert("Add a date to add to episodes");
+                } else {
+                  addScheduled;
+                }
+              }}
             >
               Schedule
             </button>
