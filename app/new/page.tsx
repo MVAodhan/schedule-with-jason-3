@@ -128,7 +128,7 @@ const Page = () => {
                 if (addDateTime === "") {
                   alert("Add a date to add to episodes");
                 } else {
-                  addScheduled;
+                  addScheduled();
                 }
               }}
             >
