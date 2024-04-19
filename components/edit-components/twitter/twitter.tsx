@@ -36,7 +36,6 @@ const Twitter = ({ episode, guest }: { episode: Episode; guest: Guest }) => {
     router.push("/");
   };
 
-  console.log(episode);
   return (
     <div>
       <div className="w-full flex flex-col items-center">
@@ -66,7 +65,7 @@ const Twitter = ({ episode, guest }: { episode: Episode; guest: Guest }) => {
                 getHighlightText(
                   guest.twitter,
                   episode.tech ? episode.tech : "tech not found",
-                  `${episode.uri}`
+                  episode.slug
                 )
               );
             }}

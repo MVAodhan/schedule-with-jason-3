@@ -21,6 +21,13 @@ const Page = () => {
   const [addDateTime, setAddDateTime] = useState<string>("");
   const [addError, setAddError] = useState("");
 
+  const tagInputRef = useRef<HTMLInputElement | null>(null);
+
+  type TTags = {
+    id: string;
+    label: string;
+  };
+  const [tags, setTags] = useState<TTags[]>([]);
   const disabled = useDisabled();
 
   const router = useRouter();
@@ -64,10 +71,16 @@ const Page = () => {
     router.push("/");
   };
 
-  const debugFunc = () => {
-    console.log();
-  };
+  const addTag = (e: any) => {
+    e.preventDefault();
+    const tag = {
+      id: uuidv4(),
+      label: e.target[0].value,
+    };
 
+    setTags((prev) => [...prev, tag]);
+    e.target[0].value === "";
+  };
   return (
     <main className="w-screen h-screen flex flex-col items-center bg-slate-50">
       <section className="w-full  md:w-10/12 flex flex-col items-center">
@@ -134,6 +147,28 @@ const Page = () => {
             >
               Schedule
             </button>
+            <form onSubmit={addTag} className="mt-5">
+              <div className="flex flex-col items-center">
+                <div className="flex flex-col justify-center gap-2">
+                  <label htmlFor="tagInput">Tags </label>
+                  <input
+                    type="text"
+                    name="tagInput"
+                    id="tagInput"
+                    className="bg-transparent py-2 px-2 border rounded-md border-gray-400 focus:outline-none"
+                  ></input>
+                  <div className="flex gap-2 max-w-[250px] flex-wrap">
+                    {tags &&
+                      tags.map((tag) => (
+                        <div className="badge" key={tag.id}>
+                          {" "}
+                          {tag.label}
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </section>

@@ -120,9 +120,12 @@ export const getScheduleTime = (date: string, tweetType?: TTweetType) => {
 export const getHighlightText = (
 	twitter: string = "",
 	tech: string = "",
-	slug: string = ""
+	slug: string = "",
+
 ) => {
-	return `Did you miss @${twitter} teaching us about ${tech} live on LWJ?
+
+
+return `Did you miss @${twitter} teaching us about ${tech} live on LWJ?
 No worries! Watch highlights from the episode here, then check out the full episode replay ${slug}`;
 };
 
@@ -170,8 +173,7 @@ export const getCredits = () => {
 
 This episode was sponsored by:
 - Nx (https://lwj.dev/nx)
-- Netlify (https://lwj.dev/netlify)
-- Vets Who Code (https://lwj.dev/vetswhocode)
+- Netlify (https://lwj.dev/netlify
 
 Live transcription by White Coat Captioning (https://whitecoatcaptioning.com/)
 `;
