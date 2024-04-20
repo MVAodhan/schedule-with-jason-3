@@ -20,7 +20,7 @@ export async function POST(request: Request) {
 			date: body.date,
 			title: body.title,
 			twitter_description: body.twitter_description,
-            tags: [],
+            tags: body.tags,
             slug: body.slug,
             uri: body.uri,
 		},

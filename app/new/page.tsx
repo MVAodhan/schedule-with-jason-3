@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+import { IoIosClose } from "react-icons/io";
+
 import CustomDateAddPicker from "@/components/CustomDateAddPicker";
 
 const Page = () => {
@@ -27,7 +29,7 @@ const Page = () => {
     id: string;
     label: string;
   };
-  const [tags, setTags] = useState<TTags[]>([]);
+  const [epTags, setEpTags] = useState<TTags[]>([]);
   const disabled = useDisabled();
 
   const router = useRouter();
@@ -60,7 +62,7 @@ const Page = () => {
       description: textDescRef.current?.value,
       twitter_description: twitterDescRef.current?.value,
       title: titleRef.current?.value,
-      tags: [],
+      tags: epTags,
       slug: slug,
       uri: uri,
     };
@@ -73,14 +75,21 @@ const Page = () => {
 
   const addTag = (e: any) => {
     e.preventDefault();
+
     const tag = {
       id: uuidv4(),
-      label: e.target[0].value,
+      label: tagInputRef.current?.value,
     };
+    setEpTags((prev) => [...prev, tag as TTags]);
 
-    setTags((prev) => [...prev, tag]);
-    e.target[0].value === "";
+    tagInputRef.current!.value = "";
   };
+
+  const removeTag = (id: any) => {
+    const newTags = epTags.filter((tag) => tag.id !== id);
+    setEpTags(newTags);
+  };
+
   return (
     <main className="w-screen h-screen flex flex-col items-center bg-slate-50">
       <section className="w-full  md:w-10/12 flex flex-col items-center">
@@ -138,8 +147,8 @@ const Page = () => {
               }`}
               disabled={disabled}
               onClick={() => {
-                if (addDateTime === "") {
-                  alert("Add a date to add to episodes");
+                if (addDateTime === "" || epTags.length === 0) {
+                  alert("Add a date ang tags to add to episodes");
                 } else {
                   addScheduled();
                 }
@@ -156,13 +165,19 @@ const Page = () => {
                     name="tagInput"
                     id="tagInput"
                     className="bg-transparent py-2 px-2 border rounded-md border-gray-400 focus:outline-none"
+                    ref={tagInputRef}
                   ></input>
                   <div className="flex gap-2 max-w-[250px] flex-wrap">
-                    {tags &&
-                      tags.map((tag) => (
+                    {epTags &&
+                      epTags.map((tag) => (
                         <div className="badge" key={tag.id}>
-                          {" "}
                           {tag.label}
+                          <button
+                            type="button"
+                            onClick={() => removeTag(tag.id)}
+                          >
+                            <IoIosClose />
+                          </button>
                         </div>
                       ))}
                   </div>
