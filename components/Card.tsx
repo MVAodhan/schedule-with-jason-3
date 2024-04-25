@@ -6,12 +6,13 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { AiOutlineDelete, AiFillEdit } from "react-icons/ai";
 import { RiCheckboxCircleFill } from "react-icons/ri";
-import { useSession } from "next-auth/react";
+
 import { UpdatePayload } from "@/lib/types";
 import { useRouter } from "next/navigation";
-import { useDisabled } from "@/lib/hooks";
+import { useAuth } from "@clerk/nextjs";
 
 const Card = ({ episode }: { episode: Episode }) => {
+  const { userId } = useAuth();
   const [usDate, setUsDate] = useState<string>("");
   const [nzDate, setNzDate] = useState<string>("");
 
@@ -19,7 +20,6 @@ const Card = ({ episode }: { episode: Episode }) => {
 
   const router = useRouter();
 
-  const disabled = useDisabled();
   useEffect(() => {
     let { usDate, nzDate } = getDates(episode.date);
     setUsDate(usDate);
@@ -49,6 +49,8 @@ const Card = ({ episode }: { episode: Episode }) => {
     router.push("/");
   };
 
+  console.log(userId);
+
   return (
     <div className="card w-full bg-gray-100 shadow-xl mx-auto   mb-10">
       <div className="card-body">
@@ -75,12 +77,11 @@ const Card = ({ episode }: { episode: Episode }) => {
           </div>
           <button
             onClick={deleteFn}
-            disabled={disabled}
-            className={`${
-              disabled === true
-                ? "disabled cursor-none"
-                : "btn bg-transparent hover:bg-transparent"
-            }`}
+            className={`
+              `}
+            disabled={
+              userId === "user_2faVnATPuAjRC93wDlSuNNY7D03" ? false : true
+            }
           >
             <AiOutlineDelete className="fill-red-700" />
           </button>

@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
 	const body = await request.json();
-	const scheduled = await prisma.episode.create({
+	await prisma.episode.create({
 		data: {
             sanityId: body.sanityId,
 			guest: {
@@ -16,6 +16,8 @@ export async function POST(request: Request) {
                 image: "",
                 twitter : body.guest.twitter
             },
+			twitter : body.guest.twitter,
+			name : body.guest.name,
 			description: body.description,
 			date: body.date,
 			title: body.title,
@@ -26,5 +28,5 @@ export async function POST(request: Request) {
 		},
 	});
 	prisma.$disconnect();
-	return NextResponse.json(scheduled);
+	return NextResponse.json({message: 'ok'});
 }

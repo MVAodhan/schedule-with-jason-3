@@ -3,12 +3,11 @@
 import { TSessionUser, UpdatePayload } from "@/lib/types";
 import { getHighlightText } from "@/lib/my-utils";
 import { Episode } from "@prisma/client";
-import { useSession } from "next-auth/react";
+
 import { useRouter } from "next/navigation";
 
 import { useEffect, useRef, useState } from "react";
 import { VscCopy } from "react-icons/vsc";
-import { useDisabled } from "@/lib/hooks";
 
 const Twitter = ({ episode, guest }: { episode: Episode; guest: Guest }) => {
   const copyText = (text: string) => {
@@ -17,10 +16,6 @@ const Twitter = ({ episode, guest }: { episode: Episode; guest: Guest }) => {
 
   const techRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-
-  const { data: session } = useSession();
-
-  const disabled = useDisabled();
 
   const updateTech = async () => {
     let episodeId = episode.id;
@@ -36,6 +31,20 @@ const Twitter = ({ episode, guest }: { episode: Episode; guest: Guest }) => {
     router.push("/");
   };
 
+  type Tag = {
+    id: String;
+    label: String;
+  };
+
+  const copyTags = (tags: Tag[]) => {
+    let tagStr = "";
+    for (const tag of tags) {
+      tagStr = tagStr + tag.label + ",";
+    }
+
+    navigator.clipboard.writeText(tagStr);
+  };
+
   return (
     <div>
       <div className="w-full flex flex-col items-center">
@@ -47,12 +56,16 @@ const Twitter = ({ episode, guest }: { episode: Episode; guest: Guest }) => {
           placeholder="Type here"
           className="input input-bordered w-full max-w-xs bg-white"
         />
-        <button
-          className="btn btn-outline mt-5"
-          onClick={updateTech}
-          disabled={disabled}
-        >
+        <button className="btn btn-outline mt-5" onClick={updateTech}>
           Update technology
+        </button>
+      </div>
+      <div className="flex justify-center">
+        <button
+          className="btn btn-outline mt-5  "
+          onClick={() => copyTags(episode.tags as [])}
+        >
+          Copy Tags
         </button>
       </div>
       {episode.tech && (

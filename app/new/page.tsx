@@ -1,9 +1,7 @@
 "use client";
 
-import { useDisabled } from "@/lib/hooks";
-
 import { getUtcDate } from "@/lib/my-utils";
-import { useSession } from "next-auth/react";
+
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -13,7 +11,6 @@ import { IoIosClose } from "react-icons/io";
 import CustomDateAddPicker from "@/components/CustomDateAddPicker";
 
 const Page = () => {
-  const { data: session } = useSession();
   const guestRef = useRef<HTMLInputElement | null>(null);
   const titleRef = useRef<HTMLInputElement | null>(null);
   const guestHandleRef = useRef<HTMLInputElement | null>(null);
@@ -30,7 +27,6 @@ const Page = () => {
     label: string;
   };
   const [epTags, setEpTags] = useState<TTags[]>([]);
-  const disabled = useDisabled();
 
   const router = useRouter();
 
@@ -140,12 +136,7 @@ const Page = () => {
               className="textarea textarea-bordered w-3/5 bg-slate-50"
             ></textarea>
             <button
-              className={`btn mt-5 ${
-                disabled === true
-                  ? "disabled cursor-none bg-red-100 border-none"
-                  : ""
-              }`}
-              disabled={disabled}
+              className={`btn mt-5 $`}
               onClick={() => {
                 if (addDateTime === "" || epTags.length === 0) {
                   alert("Add a date ang tags to add to episodes");
