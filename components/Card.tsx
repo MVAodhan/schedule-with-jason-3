@@ -9,16 +9,17 @@ import { RiCheckboxCircleFill } from "react-icons/ri";
 
 import { UpdatePayload } from "@/lib/types";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@clerk/nextjs";
+import { useDisabled } from "@/lib/hooks";
 
 const Card = ({ episode }: { episode: Episode }) => {
-  const { userId } = useAuth();
   const [usDate, setUsDate] = useState<string>("");
   const [nzDate, setNzDate] = useState<string>("");
 
   const [guest, setGuest] = useState<Guest | null>();
 
   const router = useRouter();
+
+  const isDisabled = useDisabled();
 
   useEffect(() => {
     let { usDate, nzDate } = getDates(episode.date);
@@ -49,8 +50,6 @@ const Card = ({ episode }: { episode: Episode }) => {
     router.push("/");
   };
 
-  console.log(userId);
-
   return (
     <div className="card w-full bg-gray-100 shadow-xl mx-auto   mb-10">
       <div className="card-body">
@@ -79,9 +78,7 @@ const Card = ({ episode }: { episode: Episode }) => {
             onClick={deleteFn}
             className={`
               `}
-            disabled={
-              userId === "user_2faVnATPuAjRC93wDlSuNNY7D03" ? false : true
-            }
+            disabled={isDisabled}
           >
             <AiOutlineDelete className="fill-red-700" />
           </button>

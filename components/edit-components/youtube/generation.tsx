@@ -7,6 +7,7 @@ import LinkContainer from "./linkContainer";
 import { UpdatePayload, TSessionUser } from "@/lib/types";
 
 import { useRouter } from "next/navigation";
+import { useDisabled } from "@/lib/hooks";
 
 const Generation = ({ episode }: { episode: Episode }) => {
   const chaptersRef = useRef<HTMLTextAreaElement>(null);
@@ -29,6 +30,8 @@ const Generation = ({ episode }: { episode: Episode }) => {
 
     router.push("/");
   };
+
+  const isDisabled = useDisabled();
   return (
     <div className="w-full flex justify-center h-full">
       <div className="w-4/5 h-[700px] flex flex-col ">
@@ -45,6 +48,7 @@ const Generation = ({ episode }: { episode: Episode }) => {
           <button
             className={`btn btn-outline mt-5 bg-slate-800 text-white $`}
             onClick={updateChapters}
+            disabled={isDisabled}
           >
             Update Chapters
           </button>

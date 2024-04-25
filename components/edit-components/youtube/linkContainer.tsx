@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useEffect, useRef, useState } from "react";
 
 import Link from "./link";
+import { useDisabled } from "@/lib/hooks";
 
 const LinkContainer = ({ episode }: { episode: Episode }) => {
   const [show, setShow] = useState<Boolean>(false);
@@ -53,6 +54,9 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
       body: JSON.stringify(payload),
     });
   };
+
+  const isDisabled = useDisabled();
+
   return (
     <div className="w-full  flex justify-center">
       <div className="w-1/2 flex flex-col items-center">
@@ -112,7 +116,11 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
         </div>
         {links.length > 0 && (
           <div>
-            <button className="btn btn-outline" onClick={updateLinks}>
+            <button
+              className="btn btn-outline"
+              onClick={updateLinks}
+              disabled={isDisabled}
+            >
               Update Links
             </button>
           </div>

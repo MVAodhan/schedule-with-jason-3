@@ -4,6 +4,7 @@ import { getScheduleTime, getScheduleTweet, liveLink } from "@/lib/my-utils";
 import { useEffect, useRef, useState } from "react";
 
 import { VscCopy } from "react-icons/vsc";
+import { useDisabled } from "@/lib/hooks";
 
 const Calendar = ({
   episode,
@@ -40,6 +41,8 @@ const Calendar = ({
   const [isLiveChecked, setIsLiveChecked] = useState(
     episode.live_tweet ? episode.live_tweet : false
   );
+
+  const isDisabled = useDisabled();
 
   const copyValue = (ref: any) => {
     if (ref.current?.value !== null) {
@@ -282,7 +285,7 @@ const Calendar = ({
             </div>
           </>
         )}
-      <button className="btn" onClick={saveChanges}>
+      <button className="btn" onClick={saveChanges} disabled={isDisabled}>
         {" "}
         Save Changes
       </button>

@@ -1,6 +1,5 @@
 "use client";
-import { useUser, SignOutButton } from "@clerk/nextjs";
-import Image from "next/image";
+import { useUser, SignOutButton, useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import React from "react";
 
@@ -14,6 +13,10 @@ const tabs = [
 
 const Nav = () => {
   const { user } = useUser();
+  const { userId } = useAuth();
+
+  console.log(userId);
+
   return (
     <div className="navbar bg-slate-50 w-screen">
       <div className="flex-1">
