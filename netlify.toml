@@ -1,0 +1,4 @@
+[[headers]]
+  for = "/api/episodes"
+  [headers.values]
+    Cache-Control = "no-store"
