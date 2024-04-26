@@ -13,7 +13,7 @@ export default function Home() {
   const router = useRouter();
   useEffect(() => {
     const getEpisodes = async () => {
-      const res = await fetch(`/api/episodes`);
+      const res = await fetch(`/api/episodes`, { cache: "no-store" });
       const episodes = await res.json();
       setEpisodes(episodes);
     };
