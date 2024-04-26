@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { AiOutlineDelete, AiFillEdit } from "react-icons/ai";
 import { RiCheckboxCircleFill } from "react-icons/ri";
-import { useSession } from "next-auth/react";
+
 import { UpdatePayload } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useDisabled } from "@/lib/hooks";
@@ -19,7 +19,8 @@ const Card = ({ episode }: { episode: Episode }) => {
 
   const router = useRouter();
 
-  const disabled = useDisabled();
+  const isDisabled = useDisabled();
+
   useEffect(() => {
     let { usDate, nzDate } = getDates(episode.date);
     setUsDate(usDate);
@@ -75,12 +76,9 @@ const Card = ({ episode }: { episode: Episode }) => {
           </div>
           <button
             onClick={deleteFn}
-            disabled={disabled}
-            className={`${
-              disabled === true
-                ? "disabled cursor-none"
-                : "btn bg-transparent hover:bg-transparent"
-            }`}
+            className={`
+              `}
+            disabled={isDisabled}
           >
             <AiOutlineDelete className="fill-red-700" />
           </button>

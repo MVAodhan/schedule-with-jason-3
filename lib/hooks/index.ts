@@ -1,18 +1,10 @@
-import { useSession } from "next-auth/react";
+import { useAuth } from "@clerk/nextjs";
 
-export const useDisabled = () => {
-	const { data: session } = useSession();
-
-	const userRole = session?.user?.role;
-	let disabled: boolean;
-	if (
-		process.env.NEXT_PUBLIC_ENVIRONMENT === "Development" ||
-		userRole === "admin"
-	) {
-		disabled = false;
-	} else {
-		disabled = true;
-	}
-
-	return disabled;
-};
+export const useDisabled = () =>{
+    const { userId } = useAuth();
+    if(userId === 'user_2faVnATPuAjRC93wDlSuNNY7D03'){
+        return false
+    }else{
+        return true
+    }
+}

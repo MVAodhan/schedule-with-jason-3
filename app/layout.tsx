@@ -1,8 +1,10 @@
 "use client";
 
+import { ClerkProvider } from "@clerk/nextjs";
+
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { SessionProvider } from "next-auth/react";
+
 import Nav from "@/components/Nav";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -15,13 +17,13 @@ export default function RootLayout({
   session: any;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className}`}>
-        <SessionProvider session={session}>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${inter.className}`}>
           <Nav />
           {children}
-        </SessionProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

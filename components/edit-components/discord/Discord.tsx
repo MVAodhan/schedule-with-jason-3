@@ -4,6 +4,7 @@ import { VscCopy } from "react-icons/vsc";
 import { useRef, useState } from "react";
 import { Episode } from "@prisma/client";
 import { getEndDate, liveLink } from "@/lib/my-utils";
+import { useDisabled } from "@/lib/hooks";
 
 const Discord = ({
   episode,
@@ -40,6 +41,8 @@ const Discord = ({
       body: JSON.stringify(payload),
     });
   };
+
+  const isDisabled = useDisabled();
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -108,7 +111,7 @@ const Discord = ({
           Poster
         </a>
       </div>
-      <button className="btn pt-2" onClick={saveChanges}>
+      <button className="btn pt-2" onClick={saveChanges} disabled={isDisabled}>
         {" "}
         Save Changes
       </button>

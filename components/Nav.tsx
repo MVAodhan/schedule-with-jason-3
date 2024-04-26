@@ -1,10 +1,9 @@
 "use client";
-import { signIn, signOut, useSession } from "next-auth/react";
-import Image from "next/image";
+import { useUser, SignOutButton, useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import React from "react";
 
-const Tabs = [
+const tabs = [
   {
     id: 1,
     path: "/new",
@@ -13,43 +12,34 @@ const Tabs = [
 ];
 
 const Nav = () => {
-  const { data: session } = useSession();
+  const { user } = useUser();
+  const { userId } = useAuth();
+
+  console.log(userId);
+
   return (
-    <div className="navbar bg-slate-50">
+    <div className="navbar bg-slate-50 w-screen">
       <div className="flex-1">
         <a className="btn btn-ghost normal-case" href={"/"}>
           SWJ 3.0
         </a>
-        {session && (
-          <div className="avatar">
-            <button className="w-8 rounded ml-2">
-              <Image
-                src={session.user?.image!}
-                width={40}
-                height={40}
-                alt="user avatar"
-                style={{ borderRadius: "50%" }}
-              />
-            </button>
-          </div>
-        )}
       </div>
+      {user && (
+        <>
+          <div className="px-2">{user.firstName}</div>
+          <div className="px-2">
+            <SignOutButton />
+          </div>
+        </>
+      )}
+
       <div className="hidden md:flex">
         <ul className="menu menu-horizontal px-1">
-          {Tabs.map((tab) => (
+          {tabs.map((tab) => (
             <li key={tab.id}>
               <Link href={tab.path}>{tab.label}</Link>
             </li>
           ))}
-          {session ? (
-            <li>
-              <button onClick={() => signOut()}>Signout</button>
-            </li>
-          ) : (
-            <li>
-              <button onClick={() => signIn()}>Sign In</button>
-            </li>
-          )}
         </ul>
       </div>
       <div className="dropdown dropdown-end md:hidden">
@@ -73,20 +63,11 @@ const Nav = () => {
           tabIndex={0}
           className="dropdown-content z-[1] menu p-2 shadow bg-slate-100 rounded-box w-52"
         >
-          {Tabs.map((tab) => (
+          {tabs.map((tab) => (
             <li key={tab.id}>
               <Link href={tab.path}>{tab.label}</Link>
             </li>
           ))}
-          {session ? (
-            <li>
-              <button onClick={() => signOut()}>Signout</button>
-            </li>
-          ) : (
-            <li>
-              <button onClick={() => signIn()}>Sign In</button>
-            </li>
-          )}
         </ul>
       </div>
     </div>

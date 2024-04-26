@@ -4,7 +4,7 @@ import { TLink, UpdatePayload } from "@/lib/types";
 import { Episode } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useRef, useState } from "react";
-import { useSession } from "next-auth/react";
+
 import Link from "./link";
 import { useDisabled } from "@/lib/hooks";
 
@@ -14,10 +14,6 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
 
   const demoRef = useRef<HTMLInputElement>(null);
   const repoRef = useRef<HTMLInputElement>(null);
-
-  const { data: session } = useSession();
-
-  const disabled = useDisabled();
 
   const addLink = () => {
     setLinks([...links, { id: uuidv4(), value: "" }]);
@@ -58,6 +54,9 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
       body: JSON.stringify(payload),
     });
   };
+
+  const isDisabled = useDisabled();
+
   return (
     <div className="w-full  flex justify-center">
       <div className="w-1/2 flex flex-col items-center">
@@ -120,7 +119,7 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
             <button
               className="btn btn-outline"
               onClick={updateLinks}
-              disabled={disabled}
+              disabled={isDisabled}
             >
               Update Links
             </button>

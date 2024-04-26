@@ -13,8 +13,9 @@ model Episode {
   date                String
   description         String
   twitter_desc        String?
-  guest               Json
-  host                Json?
+  guest               Json?
+  twitter             String
+  name                String      
   tags                Json?
   slug                String
   title               String
