@@ -2,3 +2,7 @@
   for = "/*"
   [headers.values]
     Cache-Control = "no-store"
+
+[[edge_functions]]
+  cache = "no-store"
+  path = "/*"
