@@ -98,7 +98,11 @@ const LinkContainer = ({ episode }: { episode: Episode }) => {
           </>
         )}
         <div>
-          <button className="btn btn-outline mt-5" onClick={addLink}>
+          <button
+            className="btn btn-outline mt-5"
+            onClick={addLink}
+            disabled={isDisabled}
+          >
             Add Link
           </button>
         </div>

@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 
 import { useEffect, useRef, useState } from "react";
 import { VscCopy } from "react-icons/vsc";
+import { useDisabled } from "@/lib/hooks";
 
 const Twitter = ({ episode, guest }: { episode: Episode; guest: Guest }) => {
   const copyText = (text: string) => {
@@ -16,6 +17,8 @@ const Twitter = ({ episode, guest }: { episode: Episode; guest: Guest }) => {
 
   const techRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
+  const isDisabled = useDisabled();
 
   const updateTech = async () => {
     let episodeId = episode.id;
@@ -56,7 +59,11 @@ const Twitter = ({ episode, guest }: { episode: Episode; guest: Guest }) => {
           placeholder="Type here"
           className="input input-bordered w-full max-w-xs bg-white"
         />
-        <button className="btn btn-outline mt-5" onClick={updateTech}>
+        <button
+          className="btn btn-outline mt-5"
+          onClick={updateTech}
+          disabled={isDisabled}
+        >
           Update technology
         </button>
       </div>

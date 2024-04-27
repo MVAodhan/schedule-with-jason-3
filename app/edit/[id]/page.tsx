@@ -31,7 +31,9 @@ const Page = ({ params }: { params: Params }) => {
 
   useEffect(() => {
     const getEpisode = async () => {
-      const res = await fetch(`/api/episode/${params.id}`);
+      const res = await fetch(`/api/episode/${params.id}`, {
+        cache: "no-store",
+      });
       const episode = await res.json();
       setEpisode(episode);
     };
