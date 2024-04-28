@@ -8,6 +8,8 @@ import { Episode } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+export const fetchCache = "force-no-store";
+
 export default function Home() {
   const [episodes, setEpisodes] = useState<Episode[] | null>([]);
 
