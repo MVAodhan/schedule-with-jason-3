@@ -2,7 +2,8 @@ import { useAuth } from "@clerk/nextjs";
 
 export const useDisabled = () =>{
     const { userId } = useAuth();
-    if(userId === 'user_2faVnATPuAjRC93wDlSuNNY7D03'){
+    // user_2fiUiI2kUxpuhPtK918Dy4PDgPG
+    if(userId === 'user_2fianaRfWN2paSRNPjyUOoQz8BM'){
         return false
     }else{
         return true

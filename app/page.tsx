@@ -2,6 +2,7 @@
 
 import Card from "@/components/Card";
 import RecurringCard from "@/components/RecurringCard";
+import { useAuth } from "@clerk/nextjs";
 
 import { Episode } from "@prisma/client";
 import { useRouter } from "next/navigation";
@@ -10,7 +11,7 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [episodes, setEpisodes] = useState<Episode[] | null>([]);
 
-  const router = useRouter();
+  const { userId } = useAuth();
   useEffect(() => {
     const getEpisodes = async () => {
       const res = await fetch(`/api/episodes`, {
@@ -23,8 +24,6 @@ export default function Home() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log(process.env.NODE_ENV);
 
   return (
     <main className="flex min-h-screen flex-col items-center px-5 md:px-24 bg-slate-50">

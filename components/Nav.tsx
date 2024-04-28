@@ -15,8 +15,6 @@ const Nav = () => {
   const { user } = useUser();
   const { userId } = useAuth();
 
-  console.log(userId);
-
   return (
     <div className="navbar bg-slate-50 w-screen">
       <div className="flex-1">
