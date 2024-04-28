@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-export const fetchCache = 'force-no-store'; 
+const dynamic = 'force-dynamic' 
 
 export async function GET(request: Request, res: NextResponse) {
 	// const prisma = new PrismaClient();
