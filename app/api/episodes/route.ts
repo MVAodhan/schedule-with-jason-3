@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+export const fetchCache = 'force-no-store'; 
+
 export async function GET(request: Request, res: NextResponse) {
 	// const prisma = new PrismaClient();
 	const episodes = await prisma.episode.findMany({
