@@ -8,7 +8,7 @@ import { Episode } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export const fetchCache = "force-no-store";
+export const dynamic = "force-dynamic";
 
 export default function Home() {
   const [episodes, setEpisodes] = useState<Episode[] | null>([]);
@@ -17,9 +17,7 @@ export default function Home() {
   console.log(userId);
   useEffect(() => {
     const getEpisodes = async () => {
-      const res = await fetch(`/api/episodes`, {
-        cache: "no-store",
-      });
+      const res = await fetch(`/api/episodes`);
       const episodes = await res.json();
       setEpisodes(episodes);
     };

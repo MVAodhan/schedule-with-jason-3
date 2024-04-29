@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-const dynamic = 'force-dynamic' 
+export const dynamic = 'force-dynamic' 
 
 export async function GET(request: Request, res: NextResponse) {
 	// const prisma = new PrismaClient();
