@@ -30,20 +30,12 @@ const Publishing = ({ episode }: { episode: Episode }) => {
   }, []);
 
   const getTags = () => {
-    let tagsArray;
-    if (episode.tags) {
-      tagsArray = episode.tags!.map((tag: Tag) => tag.label);
-      let tags: string = "";
-      if (tagsArray.length > 1) {
-        for (let tag of tagsArray) {
-          tags = tags + tag + ",";
-        }
-      } else {
-        tags = tagsArray[0];
-      }
+    let tags = "";
+    for (let tag of episode.tags as Tag[]) {
+      tags = `${tags} ${tag.label}, `;
     }
 
-    return tags;
+    return tags as string;
   };
 
   const formatLinks = () => {
@@ -117,6 +109,7 @@ ${episode.chapters ?? `Chapters: ${episode.chapters}`}`;
         <VscCopy
           className="cursor-pointer pl-1 h-8 w-8"
           onClick={() => {
+            // getTags();
             copyText(getTags());
           }}
         />
