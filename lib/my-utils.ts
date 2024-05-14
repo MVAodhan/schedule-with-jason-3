@@ -126,7 +126,7 @@ export const getHighlightText = (
 
 
 return `Did you miss @${twitter} teaching us about ${tech} live on LWJ?
-No worries! Watch highlights from the episode here, then check out the full episode replay ${slug}`;
+No worries! Watch highlights from the episode here, then check out the full episode replay https://www.learnwithjason.dev/${slug}`;
 };
 
 export const getUtcDate = (
