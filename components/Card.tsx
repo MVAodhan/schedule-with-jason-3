@@ -77,20 +77,26 @@ const Card = ({ episode }: { episode: Episode }) => {
           <div>NZ Date: {nzDate}</div>
         </div>
         <div className="flex justify-around">
-          <div className="flex flex-col justify-around items-center">
-            <h2> Buffer</h2>
-            {episode.schedule_tweet === true &&
-              episode.ninety_minute_tweet === true &&
-              episode.live_tweet === true && (
+          {episode.schedule_tweet === true &&
+            episode.ninety_minute_tweet === true &&
+            episode.live_tweet === true && (
+              <div className="flex flex-col justify-around items-center">
+                <h2> Buffer</h2>
                 <RiCheckboxCircleFill className="fill-green-500 h-[50px] w-[50px]" />
-              )}
-          </div>
-          <div className="flex flex-col justify-around items-center">
-            <h2> Discord </h2>
-            {episode.discord_event === true && (
-              <RiCheckboxCircleFill className="fill-green-500 h-[50px] w-[50px]" />
+              </div>
             )}
-          </div>
+          {episode.discord_event === true && (
+            <div className="flex flex-col justify-around items-center">
+              <h2> Discord </h2>
+              <RiCheckboxCircleFill className="fill-green-500 h-[50px] w-[50px]" />
+            </div>
+          )}
+          {episode.website === true && (
+            <div className="flex flex-col justify-around items-center">
+              <h2> Website </h2>
+              <RiCheckboxCircleFill className="fill-green-500 h-[50px] w-[50px]" />
+            </div>
+          )}
         </div>
       </div>
     </div>

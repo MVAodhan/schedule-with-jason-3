@@ -34,6 +34,7 @@ model Episode {
   discord_event       Boolean?
   calendar_event      Boolean?
   website             Boolean?
+  streamyard          Boolean?
 }
 
 model Schedule {
