@@ -14,7 +14,7 @@ export default function Home() {
   const [episodes, setEpisodes] = useState<Episode[] | null>([]);
 
   const { userId } = useAuth();
-  console.log(userId);
+
   useEffect(() => {
     const getEpisodes = async () => {
       const res = await fetch(`/api/episodes`);

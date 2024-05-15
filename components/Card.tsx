@@ -97,6 +97,12 @@ const Card = ({ episode }: { episode: Episode }) => {
               <RiCheckboxCircleFill className="fill-green-500 h-[50px] w-[50px]" />
             </div>
           )}
+          {episode.calendar_event === true && (
+            <div className="flex flex-col justify-around items-center">
+              <h2> Calendar Event </h2>
+              <RiCheckboxCircleFill className="fill-green-500 h-[50px] w-[50px]" />
+            </div>
+          )}
         </div>
       </div>
     </div>

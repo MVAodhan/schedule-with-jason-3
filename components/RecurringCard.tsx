@@ -12,6 +12,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import CustomDatePicker from "./CustomDatePicker";
 import { useDisabled } from "@/lib/hooks";
+import { RiCheckboxCircleFill } from "react-icons/ri";
 
 const Card = ({ episode }: { episode: Episode; title: String }) => {
   const [usDate, setUsDate] = useState<string>("");
@@ -23,6 +24,7 @@ const Card = ({ episode }: { episode: Episode; title: String }) => {
 
   useEffect(() => {
     let { usDate, nzDate } = getDates(episode.date);
+
     setUsDate(usDate);
     setNzDate(nzDate);
 
@@ -55,7 +57,7 @@ const Card = ({ episode }: { episode: Episode; title: String }) => {
             </button>
           </Link>
           <button
-            className="btn bg-transparent hover:bg-transparent"
+            className=" bg-transparent hover:bg-transparent"
             disabled={disabled}
             onClick={() => {
               handleReset();
@@ -79,6 +81,34 @@ const Card = ({ episode }: { episode: Episode; title: String }) => {
           <div className="w-1/2 flex items-center">
             NZ Date: <span className="ml-2">{nzDate}</span>
           </div>
+        </div>
+        <div className="flex justify-around ">
+          {episode.schedule_tweet === true &&
+            episode.ninety_minute_tweet === true &&
+            episode.live_tweet === true && (
+              <div className="flex flex-col justify-around items-center">
+                <h2> Buffer</h2>
+                <RiCheckboxCircleFill className="fill-green-500 h-[50px] w-[50px]" />
+              </div>
+            )}
+          {episode.discord_event === true && (
+            <div className="flex flex-col justify-around items-center">
+              <h2> Discord </h2>
+              <RiCheckboxCircleFill className="fill-green-500 h-[50px] w-[50px]" />
+            </div>
+          )}
+          {episode.website === true && (
+            <div className="flex flex-col justify-around items-center">
+              <h2> Website </h2>
+              <RiCheckboxCircleFill className="fill-green-500 h-[50px] w-[50px]" />
+            </div>
+          )}
+          {episode.calendar_event === true && (
+            <div className="flex flex-col justify-around items-center">
+              <h2> Calendar Event </h2>
+              <RiCheckboxCircleFill className="fill-green-500 h-[50px] w-[50px]" />
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ export async function POST(req : NextRequest, res : NextResponse){
 					id: body.id
 				},
 				data: {
-                    date: '',
+                    date: "2024-01-01T17:00:00Z",
 					yt_live_link : '',
 					schedule_tweet : false,
 					ninety_minute_tweet: false,

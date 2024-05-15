@@ -10,7 +10,7 @@ export function cn(...inputs: ClassValue[]) {
 export const liveLink = 'https://lwj.dev/live'
 
 export function getDates(date: string) {
-	const utcInstant = Temporal.Instant.from(date);
+	const utcInstant = Temporal.Instant.from(date ?? "2024-01-01T17:00:00Z");
 	const pstZonedDateTime = utcInstant.toZonedDateTime({
 		timeZone: "America/Los_Angeles",
 		calendar: "gregory",
