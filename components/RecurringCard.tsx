@@ -82,7 +82,7 @@ const Card = ({ episode }: { episode: Episode; title: String }) => {
             NZ Date: <span className="ml-2">{nzDate}</span>
           </div>
         </div>
-        <div className="flex justify-around ">
+        <div className="flex justify-around mt-5">
           {episode.schedule_tweet === true &&
             episode.ninety_minute_tweet === true &&
             episode.live_tweet === true && (

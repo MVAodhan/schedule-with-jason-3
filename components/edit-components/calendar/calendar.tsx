@@ -42,6 +42,13 @@ const Calendar = ({
     episode.live_tweet ? episode.live_tweet : false
   );
 
+  const [isWebsiteChecked, setIsWebsiteChecked] = useState(
+    episode.website ? episode.website : false
+  );
+  const [isCalendarChecked, setIsCalendarChecked] = useState(
+    episode.calendar_event ? episode.calendar_event : false
+  );
+
   const isDisabled = useDisabled();
 
   const copyValue = (ref: any) => {
@@ -59,6 +66,8 @@ const Calendar = ({
       ninety_minute_tweet: isNinetyMinuteChecked,
       live_tweet: isLiveChecked,
       yt_live_link: ytLiveLink.current?.value,
+      website: isWebsiteChecked,
+      calendar_event: isCalendarChecked,
     };
 
     await fetch("/api/save-changes", {
@@ -189,6 +198,35 @@ const Calendar = ({
         (ytLiveLink.current?.value.length! > 1 ||
           ytLiveLinkDefault.length > 1) && (
           <>
+            <div className="flex w-full justify-around">
+              <div>
+                <div className="flex flex-col items-center ">
+                  <label className="cursor-pointer label">Website</label>
+                  <input
+                    type="checkbox"
+                    checked={isWebsiteChecked}
+                    className="checkbox checkbox-accent"
+                    onChange={() => {
+                      setIsWebsiteChecked((prev) => !prev);
+                    }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="flex flex-col items-center ">
+                  <label className="cursor-pointer label">Calendar</label>
+                  <input
+                    type="checkbox"
+                    checked={isCalendarChecked}
+                    className="checkbox checkbox-accent"
+                    onChange={() => {
+                      setIsCalendarChecked((prev) => !prev);
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
             <div className="w-full mt-10 mb-10 flex justify-between">
               <div className="flex flex-col items-center">
                 {twoWeeks}

@@ -13,8 +13,9 @@ export async function POST(request: Request) {
             schedule_tweet : body.schedule_tweet,
             ninety_minute_tweet : body.ninety_minute_tweet,
             live_tweet : body.live_tweet,
-            yt_live_link: body.yt_live_link
-
+            yt_live_link: body.yt_live_link,
+            website: body.website,
+            calendar_event: body.calendar_event
         }
     })
 	prisma.$disconnect();
