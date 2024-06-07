@@ -14,7 +14,9 @@ export async function POST(req : NextRequest, res : NextResponse){
 					schedule_tweet : false,
 					ninety_minute_tweet: false,
 					live_tweet: false,
-					discord_event: false
+					discord_event: false,
+					website: false,
+					calendar_event: false
 				},
 			});
 	prisma.$disconnect();

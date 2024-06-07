@@ -184,13 +184,6 @@ const Calendar = ({
           }
           defaultValue={ytLiveLinkDefault}
         ></input>
-        <button
-          onClick={() => {
-            console.log(ytLiveLink.current?.value);
-          }}
-        >
-          Log
-        </button>
       </div>
 
       {(twitterDescRef.current?.value.length! > 1 ||
