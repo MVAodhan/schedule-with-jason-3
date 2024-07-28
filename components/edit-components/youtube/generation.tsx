@@ -8,6 +8,7 @@ import { UpdatePayload, TSessionUser } from "@/lib/types";
 
 import { useRouter } from "next/navigation";
 import { useDisabled } from "@/lib/hooks";
+import { getSponsors, sponsors } from "@/lib/my-utils";
 
 const Generation = ({ episode }: { episode: Episode }) => {
   const chaptersRef = useRef<HTMLTextAreaElement>(null);
