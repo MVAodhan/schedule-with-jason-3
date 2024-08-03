@@ -18,6 +18,10 @@ export const sponsors: Sponsor[] = [
     name: "Netlify",
     slug: "netlify",
   },
+  {
+    name: "Tuple",
+    slug: "tuple",
+  },
 ];
 
 export function getDates(date: string) {
