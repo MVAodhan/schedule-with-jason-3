@@ -25,7 +25,7 @@ const Discord = ({
 
   const copyValue = (ref: any) => {
     if (ref.current?.value !== null) {
-      const string = `LWJ: ${ref.current?.value} with ${guest.name}`;
+      const string = `${ref.current?.value}`;
       navigator.clipboard.writeText(string);
     }
   };
